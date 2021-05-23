@@ -1,38 +1,132 @@
-.App {
+
+.bg_image {
+  background-color: seagreen;
+  /* background-image: url("https://www.nicepng.com/png/detail/21-214920_popcorn-transparent-png-movie-popcorn-transparent.png"); */ 
+position: absolute;
+top: 0;
+width: 100%;
+height: 100%;
+background-size: auto;
+}
+.form-signin-heading{
+  background-color: rgb(241, 237, 0);
+}
+
+.formcontainer{
+  -ms-text-size-adjust: 20%;
+  display: grid;
+  place-items: center;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; 
+  display: inline-block;
+  /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
   text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+} 
+
+/* Do an horizontal flip when you move the mouse over the flip box container  */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+ 
+} 
+
+/* Position the front and back side  */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden;
+  
+}  
+
+/* Style the front side (fallback if image is missing)  */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+} 
+
+/* Style the back side  */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: black;
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+} 
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul {
+  list-style-type: '';
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
 }
 
-.App-link {
-  color: #61dafb;
+.contain {
+  width: 100%;
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.left-panel {
+    width: 25%;
+    height: 100%;
+    float: left;
+    background-color: rosybrown;
+    border-collapse: collapse;
+}
+
+.middle-panel {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: royalblue;
+    border-collapse: collapse;
+}
+
+.right-panel {
+  width: 25%;
+  height: 100%;
+  position: relative;
+  float: right;
+  background-color: yellow;
+  border-collapse: collapse;
+}
+
+.top-panel {
+  width: 100%;
+  height: 100px;
+  border-collapse: collapse;
 }
