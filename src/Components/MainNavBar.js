@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React from "react";
 import UserPage from "../Components/UserPage";
+import EditUser from "../Components/EditUser";
 import MainContainer from "../Containers/MainContainer";
 
 
 function MainNavBar(props) {
   return (
-    <Router>
-      <div>
+    <div>
+      <Router>
         <nav>
           <ul>
             <Link to="/myaccount" className="btn btn-primary">
@@ -23,24 +24,31 @@ function MainNavBar(props) {
               Movies
             </Link>
             <span></span>
-            <button
-              onClick={(e) => props.handleSignOut(e)}
-              className="btn btn-primary"
-            >
-              Sign Out
-            </button>
+            <Link to="/editprofile" className="btn btn-primary">
+              EditProfile
+            </Link>
+            <span></span>
+            {/* <button
+            onClick={(e) => props.handleSignOut(e)}
+            className="btn btn-primary"
+          >
+            Sign Out
+          </button> */}
           </ul>
         </nav>
-        <Switch>
-          <Route path="/myaccount">
-            <UserPage />
-          </Route>
-          <Route path="/home">
-            <MainContainer />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+        <Route
+          exact
+          path="/myaccount"
+          render={(routerProps) => (
+            <UserPage {...routerProps} handleSignOut={props.handleSignOut} />
+          )}
+        ></Route>
+        <Route
+          path="/editprofile"
+          render={(routerProps) => <EditUser {...routerProps} handleEditUser={props.handleEditUser} />}
+        ></Route>
+      </Router>
+    </div>
   );
 }
 

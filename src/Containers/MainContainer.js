@@ -7,31 +7,24 @@ import MainNavBar from "../Components/MainNavBar";
 import MovieList from "../Components/MovieList";
 import SearchBar from "../Components/SearchBar"
 import VideoClip from "../Components/VideoClip"
-import UserPage from "../Components/UserPage"
+
 
 function MainContainer(props) {
   const logged_in = useSelector((state) => state.userState.logged_in);
+ 
 
   return (
     <Router>
+      <Switch>
       <div className="contain">
         <MainConHeader />
-        <MainNavBar handleSignOut={props.handleSignOut} />
+        <MainNavBar handleSignOut={props.handleSignOut} handleEditUser={props.handleEditUser} />
         <SearchBar />
         <VideoClip />
-        <Switch>
-          <Route path="/users"></Route>
-        </Switch>
-      </div>
-      <div>
-        <div>
-          <div className="center-panel">
             <MovieList />
-            
-            {!logged_in ? props.history.push("/signin") : null}
-          </div>
+          {!logged_in ? props.history.push("/signin") : null}
         </div>
-      </div>
+      </Switch>
     </Router>
   );
 }

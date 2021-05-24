@@ -6,23 +6,21 @@ function SearchBar() {
   
   const dispatch = useDispatch();
   const allmovies = useSelector((state) => state.movieState.movies);
-  const filtered = useSelector((state) => state.movieState.filtered)
-  // NEED TO MAKE AN ARRAY OF ALL THE MOVIES THAT DONT FIT INTO MY FILTERS AND ADD THEM TO THEIR OWN ARRAY TO SET THEM BACK TO "MOVIES" ON A RESET
+ 
 
-  const all = [...allmovies, ...filtered]
 
   function handleAlpha(e) {
     e.preventDefault()
     let alpha = allmovies.sort()
-    dispatch({type: 'FILTER', movies: alpha})
+    dispatch({ type: 'FILTER', movies: alpha })
   }
 
   function handleMarquee(e) {
     e.preventDefault()
     let filteredtitle = e.target.value
     console.log("search", filteredtitle)
-   let filteredmovies =  allmovies.filter((movie) => movie.title.toLowerCase().includes(filteredtitle.toLowerCase())).sort()
-    dispatch({ type: 'FILTER', movies: filteredtitle.length > 0 ? filteredmovies : allmovies })
+    let filteredmovies = allmovies.filter((movie) => movie.title.toLowerCase().includes(filteredtitle.toLowerCase())).sort()
+    dispatch({ type: 'FILTER', filtered: filteredtitle.length > 0 ? filteredmovies : allmovies })
   }
   
   function handleGenre(e) {
@@ -32,7 +30,7 @@ function SearchBar() {
     let filteredbygenre = allmovies.filter((movie) =>
       movie.genres.includes(chosen)
     );
-    dispatch({type: 'FILTER', movies: filteredbygenre})
+    dispatch({type: 'FILTER', filtered: filteredbygenre})
   }
   
   function selectGenreOption() {
@@ -47,7 +45,7 @@ function SearchBar() {
     console.log(e.target.value)
     let director = e.target.value
     let directedby = allmovies.filter((movie) => movie.directors.includes(director))
-    dispatch ({ type: 'FILTER', movies: directedby })
+    dispatch ({ type: 'FILTER', filtered: directedby })
   }
   
   function selectDirectorOption() {
@@ -61,7 +59,7 @@ function SearchBar() {
   function handleStarring(e) {
     let starring = e.target.value
     let bigtime = allmovies.filter((movie) => movie.starring.includes(starring))
-    dispatch({ type: 'FILTER', movie: bigtime})
+    dispatch({ type: 'FILTER', filtered: bigtime})
   }
 
   function selectStarringOption() {
@@ -78,7 +76,7 @@ function SearchBar() {
 
   function handleReset(e) {
     console.log(e.target.value)
-    dispatch({ type: 'RESET', movies: allmovies })
+    dispatch({ type: 'RESET' })
   }
 
   return (
