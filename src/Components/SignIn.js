@@ -1,18 +1,9 @@
 import React from "react";
-import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-import { useSelector } from 'react-redux'
-
-
+import { Link, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SignIn = (props) => {
-  const logged_in = useSelector(state => state.userState.logged_in)
-
+  const logged_in = useSelector((state) => state.userState.logged_in);
 
   return (
     <div className="bg_image">
@@ -40,7 +31,7 @@ const SignIn = (props) => {
             Create Account
           </Link>
         </form>
-        {logged_in ? <Redirect to="/home" /> : null}
+        {logged_in ? <Redirect to="/home" /> : <Redirect to="/signin"/>}
       </div>
     </div>
   );

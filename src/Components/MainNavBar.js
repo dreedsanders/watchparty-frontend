@@ -1,9 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import React from "react";
 import UserPage from "../Components/UserPage";
 import EditUser from "../Components/EditUser";
-import MainContainer from "../Containers/MainContainer";
-
 
 function MainNavBar(props) {
   return (
@@ -15,7 +13,6 @@ function MainNavBar(props) {
               My Profile
             </Link>
             <span></span>
-
             <Link to="/users" className="btn btn-primary">
               Users
             </Link>
@@ -28,24 +25,28 @@ function MainNavBar(props) {
               EditProfile
             </Link>
             <span></span>
-            {/* <button
-            onClick={(e) => props.handleSignOut(e)}
-            className="btn btn-primary"
-          >
-            Sign Out
-          </button> */}
+            <Link to="/game" className="btn btn-primary">
+              Play Popcorn Game
+            </Link>
+            <span></span>
           </ul>
         </nav>
         <Route
           exact
           path="/myaccount"
           render={(routerProps) => (
-            <UserPage {...routerProps} handleSignOut={props.handleSignOut} />
+            <UserPage
+              {...routerProps}
+              handleSignOut={props.handleSignOut}
+              getMovieWatches={props.getMovieWatches}
+            />
           )}
         ></Route>
         <Route
           path="/editprofile"
-          render={(routerProps) => <EditUser {...routerProps} handleEditUser={props.handleEditUser} />}
+          render={(routerProps) => (
+            <EditUser {...routerProps} handleEditUser={props.handleEditUser} />
+          )}
         ></Route>
       </Router>
     </div>

@@ -1,10 +1,9 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CreateUser = (props) => {
-  const usercreated = useSelector((state) => state.userState.usercreated);
-  const errormsg = useSelector((state) => state.userState.errormsg)
+  const errormsg = useSelector((state) => state.userState.errormsg);
   return (
     <div className="formcontainer">
       <div style={{ textAlign: "center" }} className="row">
@@ -57,14 +56,7 @@ const CreateUser = (props) => {
             Sign in
           </Link>
         </form>
-        {errormsg ? <strong>{errormsg}</strong> : null }
-        {/* {usercreated ? (
-          <Redirect to="/signin" />
-        ) : (
-          <strong>
-            <h4 style={{ color: "red" }}>{props.errormsg}</h4>
-          </strong>
-        )} */}
+        {errormsg ? <strong>{errormsg}</strong> : null}
       </div>
     </div>
   );

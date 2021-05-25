@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function MainConHeader() {
   return (
@@ -9,7 +9,6 @@ function MainConHeader() {
         alt=""
       ></img>
     </div>
-    );
-
+  );
 }
-export default MainConHeader
+export default MainConHeader;

@@ -1,11 +1,11 @@
 import React from "react";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-function VideoClip() {
+function VideoClip3() {
   return (
     <div className="right-panel1">
-      <YoutubeEmbed embedId={"poLPKdc-zTY"} />
+      <YoutubeEmbed embedId={"olXYZOsXw_o"} />
     </div>
   );
 }
-export default VideoClip;
+export default VideoClip3;

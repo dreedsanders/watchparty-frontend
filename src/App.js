@@ -1,29 +1,19 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  // Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreateUser from "./Components/CreateUser";
 import SignIn from "./Components/SignIn";
 import MainContainer from "./Containers/MainContainer";
-import EditUser from "./Components/EditUser";
+import MovieReviewForm from "./Components/MovieReviewForm";
 
 function App() {
   const dispatch = useDispatch();
 
-  let current_user = useSelector(state => state.userState.current_user)
-  // console.log(current_user)
-
-
-  // let ids = ["tt0068646", "tt0133093"];
+  let current_user = useSelector((state) => state.userState.current_user);
+  let currentMovie = useSelector((state) => state.movieState.currentMovie);
 
   useEffect(() => {
-    // ids.forEach((id) => getMovies(id));
     getReviews();
     getResponses();
     getMovieWatches();
@@ -32,39 +22,17 @@ function App() {
   }, []);
 
   const getUsers = () => {
-    fetch("http://localhost:3000/api/v1/users")
-      .then(res => res.json())
-    .then(data => dispatch({ type: "USERS", users:data}) )
-  }
-
-  const getMovies = (id) => {
-    fetch(
-      `https://movies-tvshows-data-imdb.p.rapidapi.com/?type=get-movie-details&imdb=${id}`,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "02e66b9f2fmshc40c9abe86ec5dep1cf267jsn78b29265385e",
-          "x-rapidapi-host": "movies-tvshows-data-imdb.p.rapidapi.com",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: "GET_MOVIES", movies: data }));
-
-    fetch(
-      `https://movies-tvshows-data-imdb.p.rapidapi.com/?type=get-movies-images-by-imdb&imdb=${id}`,
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "02e66b9f2fmshc40c9abe86ec5dep1cf267jsn78b29265385e",
-          "x-rapidapi-host": "movies-tvshows-data-imdb.p.rapidapi.com",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: "GET_MOVIE_IMGS", movieimgs: data }));
+    let reqPack = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch("http://localhost:3000/api/v1/users", reqPack)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "USERS", users: data }));
   };
 
   const getReviews = () => {
@@ -73,6 +41,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
     };
     fetch("http://localhost:3000/api/v1/reviews", recPack)
@@ -86,6 +55,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
     };
     fetch("http://localhost:3000/api/v1/responses", recPack)
@@ -99,6 +69,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
     };
     fetch("http://localhost:3000/api/v1/movie_watches", recPack)
@@ -114,11 +85,14 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
     };
     fetch("http://localhost:3000/api/v1/movies", recPack)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "GETBACKENDMOVIES", backendmovies: data }));
+      .then((data) =>
+        dispatch({ type: "GETBACKENDMOVIES", backendmovies: data })
+      );
   };
 
   const handleCreateUser = (e) => {
@@ -133,6 +107,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
       body: JSON.stringify(user),
     };
@@ -155,6 +130,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
       body: JSON.stringify(user),
     };
@@ -162,24 +138,24 @@ function App() {
     fetch("http://localhost:3000/api/v1/login", reqPackage)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.user);
         localStorage.setItem("token", data.token);
-        localStorage.token !== "undefined" ? 
-        dispatch({
-          type: "SIGN_IN",
-          current_user: data.user,
-          errormsg: data.error,
-        }) : dispatch({type: 'FAILED'});
+        localStorage.token !== "undefined"
+          ? dispatch({
+              type: "SIGN_IN",
+              current_user: data.user,
+              errormsg: data.error,
+            })
+          : dispatch({ type: "FAILED" });
       });
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = (e, history) => {
     localStorage.clear();
     dispatch({ type: "SIGN_OUT" });
     dispatch({ type: "LOGOUT" });
   };
 
-  const handleEditUser = (e) => {
+  const handleEditUser = (e, history, dispatch) => {
     e.preventDefault();
     let newUser = {
       name: e.target[0].value,
@@ -188,16 +164,43 @@ function App() {
       email: e.target[3].value,
     };
     let recPack = {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Application" : "application/json"
+        Application: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(newUser)
-    }
+      body: JSON.stringify(newUser),
+    };
     fetch(`http://localhost:3000/api/v1/users/${current_user.id}`, recPack)
-      .then(res => res.json())
-    .then(data => dispatch({type: "EDIT", current_user: data}))
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "EDIT", current_user: data }));
+    e.target.reset();
+    history.push("/myaccount");
+  };
+
+  let handleReview = (e, history, dispatch) => {
+    e.preventDefault();
+    let review = {
+      review: e.target[0].value,
+      user_id: current_user.id,
+      movie_id: currentMovie.id,
+    };
+    let recPack = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(review),
+    };
+    fetch("http://localhost:3000/api/v1/reviews", recPack)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "ADD_REVIEW", review: data }))
+      .then(getReviews);
+    e.target.reset();
+    history.push("/home");
   };
 
   return (
@@ -214,13 +217,21 @@ function App() {
             exact
             path="/home"
             render={(routerProps) => (
-              <MainContainer handleSignOut={handleSignOut} {...routerProps} handleEditUser={handleEditUser} />
+              <MainContainer
+                handleSignOut={handleSignOut}
+                {...routerProps}
+                handleEditUser={handleEditUser}
+                getResponses={getResponses}
+                getMoviesfromBack={getMoviesfromBack}
+                getMovieWatches={getMovieWatches}
+              />
             )}
           ></Route>
           <Route exact path="/users"></Route>
-          {/* <Route exact path="/editprofile">
-            <EditUser />
-          </Route> */}
+          <Route exact path="/moviereview">
+            <MovieReviewForm handleReview={handleReview} />
+          </Route>
+          <Route exact path="/reply"></Route>
         </Switch>
       </Router>
     </div>

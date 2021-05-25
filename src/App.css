@@ -116,10 +116,26 @@ body, html {
 }
 
 .right-panel {
+  width: 10%;
+  height: 100%;
+  position: relative;
+  float: right;
+  /* background-color: yellow; */
+  border-collapse: collapse;
+}
+.right-panel1 {
   width: 25%;
   height: 25%;
   position: relative;
   float: right;
+  /* background-color: yellow; */
+  border-collapse: collapse;
+}
+.right-panel2 {
+  width: 25%;
+  height: 25%;
+  position: relative;
+
   /* background-color: yellow; */
   border-collapse: collapse;
 }
