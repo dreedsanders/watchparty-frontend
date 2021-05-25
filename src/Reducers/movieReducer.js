@@ -8,21 +8,23 @@ const initialState = {
     backendmovies: [],
     movieimgs: [],
     filtered: [],
-    filtering: false
+  filtering: false,
+  currentMovie: [],
+  clicked: false
 }
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_MOVIES":
-        return {
-          ...state,
-          movies: [...state.movies, action.movies],
-        };
-      case "GET_MOVIE_IMGS":
-        return {
-          ...state,
-          movieimgs: [...state.movieimgs, action.movieimgs],
-        };
+      // case "GET_MOVIES":
+      //   return {
+      //     ...state,
+      //     movies: [...state.movies, action.movies],
+      //   };
+      // case "GET_MOVIE_IMGS":
+      //   return {
+      //     ...state,
+      //     movieimgs: [...state.movieimgs, action.movieimgs],
+      //   };
       case "GET_REVIEWS":
         return {
           ...state,
@@ -56,6 +58,17 @@ const movieReducer = (state = initialState, action) => {
           ...state,
           filtering: false,
         };
+      case "CLICKED":
+        return {
+          ...state,
+          currentMovie: action.currentMovie,
+          clicked: true
+        }
+      case "BACK":
+        return {
+          ...state,
+          clicked: false
+        }
       default:
         return state;
     }

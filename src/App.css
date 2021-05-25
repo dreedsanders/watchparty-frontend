@@ -101,27 +101,26 @@ body, html {
 }
 
 .left-panel {
-    width: 25%;
-    height: 100%;
+    width: 18%;
+    height: 22%;
     float: left;
     background-color: rosybrown;
     border-collapse: collapse;
 }
 
-.middle-panel {
+.center-panel {
     width: 50%;
     height: 100%;
-    float: left;
-    background-color: royalblue;
+    display: inline-block;
     border-collapse: collapse;
 }
 
 .right-panel {
   width: 25%;
-  height: 100%;
+  height: 25%;
   position: relative;
   float: right;
-  background-color: yellow;
+  /* background-color: yellow; */
   border-collapse: collapse;
 }
 

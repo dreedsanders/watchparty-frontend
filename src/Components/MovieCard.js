@@ -1,60 +1,39 @@
 import React, { useState } from "react";
 import YoutubeEmbed from "./YoutubeEmbed";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 const MovieCard = (props) => {
-  // const [details, setDetails] = useState(false)
-  
-  return (
-      <div className="flip-card" style={{ backgroundColor: "red" }}>
-        <div className="flip-card-inner">
-          <div className="flip-card-front">
-            <img
-              src={props.movieimg[0].poster}
-              style={{ width: "200px", height: "200px" }}
-              alt=""
-            ></img>
-          </div>
-          <div className="flip-card-back">
-            <img
-              src={props.movieimg[0].fanart}
-              className={"p-avatar"}
-              alt=""
-              style={{ height: "250px" }}
-            ></img>
-            <h1>
-              {props.movie.title}:{props.movie.year}
-              <br></br>
-              <button className="btn btn-primary">Like 🤍</button>
-              <button className="btn btn-primary">Add To Watchlist</button>
-              <br></br>
-            </h1>
-            <h3>🎬IMDB RATING | {props.movie.imdb_rating}🎬</h3>
+  let dispatch = useDispatch();
+  let clicked = useSelector((state) => state.movieState.clicked);
 
-            <ul>
-              {" "}
-              Directed by:
-              <h5>
-                {props.movie.directors.map((director) => (
-                  <li>{director}</li>
-                ))}
-              </h5>
-            </ul>
-            <br></br>
-            <ul>
-              Starring ⭐:
-              <h5>
-                {props.movie.stars[0]} & {props.movie.stars[1]}
-              </h5>
-            </ul>
-            <p>
-              <strong>Description</strong>: {props.movie.description}
-            </p>
-            <br></br>
-            <h5> 🎥 Trailer 🎞</h5>
-            <YoutubeEmbed embedId={props.movie.youtube_trailer_key} />
-          </div>
-        </div>
-      </div>
+  let handleMovieClick = (e) => {
+    e.preventDefault();
+    console.log(props.movie);
+    dispatch({ type: "CLICKED", currentMovie: props.movie });
+  };
+
+  return (
+    <div
+      // style={{ backgroundColor: "green" }}
+      onClick={(e) => handleMovieClick(e)}
+    >
+      <img
+        src={props.movie.poster}
+        style={{ width: "200px", height: "200px" }}
+        alt=""
+      ></img>
+      <h1>
+        {props.movie.title}:{props.movie.year}
+        <br></br>
+        <button className="btn btn-primary">Like 🤍 {props.movie.likes} likes</button>
+        <button className="btn btn-primary">Add To Watchlist</button>
+        <br></br>
+      </h1>
+      {/* <h5> 🎥 Trailer 🎞</h5> */}
+      {/* <YoutubeEmbed embedId={props.movie.youtube_trailer_key} /> */}
+    </div>
   );
 };
 

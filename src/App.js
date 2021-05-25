@@ -20,15 +20,22 @@ function App() {
   // console.log(current_user)
 
 
-  let ids = ["tt0068646", "tt0133093"];
+  // let ids = ["tt0068646", "tt0133093"];
 
   useEffect(() => {
-    ids.forEach((id) => getMovies(id));
+    // ids.forEach((id) => getMovies(id));
     getReviews();
     getResponses();
     getMovieWatches();
-    getMoviesfromBack()
+    getMoviesfromBack();
+    getUsers();
   }, []);
+
+  const getUsers = () => {
+    fetch("http://localhost:3000/api/v1/users")
+      .then(res => res.json())
+    .then(data => dispatch({ type: "USERS", users:data}) )
+  }
 
   const getMovies = (id) => {
     fetch(

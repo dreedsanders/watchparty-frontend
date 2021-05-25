@@ -35,10 +35,7 @@ const SignIn = (props) => {
             className="form-control"
             placeholder="Password"
           ></input>
-          <input
-            type="submit"
-            className="btn btn-lg btn-primary btn-block"
-          ></input>
+          <input type="submit" className="btn btn-primary"></input>
           <Link to="/" className="btn btn-primary">
             Create Account
           </Link>

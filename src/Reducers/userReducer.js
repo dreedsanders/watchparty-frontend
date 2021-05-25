@@ -4,7 +4,8 @@ const initialState = {
     usercreated: false,
     logged_in: false,
     errormsg: "",
-    current_user: {}
+    current_user: {},
+    users: {}
 }
 
 const userReducer = (state = initialState, action) => {
@@ -25,18 +26,19 @@ const userReducer = (state = initialState, action) => {
                 errormsg: action.errormsg
             }
         case 'SIGN_OUT':
-            return {
-              ...state,
-              usercreated: false,
-              logged_in: false,
-            }
+            return state
         case 'EDIT':
             return {
                 ...state,
                 current_user: action.current_user
             }
+        case "USERS":
+            return {
+                ...state,
+                users: action.users
+            }
         case 'DELETE':
-            return initialState
+            return state
         default:
             return state
     }
