@@ -10,16 +10,18 @@ const MovieCard = (props) => {
   };
 
   return (
-    <div onClick={(e) => handleMovieClick(e)}>
+    <div onClick={(e) => handleMovieClick(e)} className="card">
       <img
         src={props.movie.poster}
         style={{ width: "200px", height: "200px" }}
         alt=""
       ></img>
       <h1>
-        {props.movie.title}:{props.movie.year}
+        {props.movie.title}
         <br></br>
-        <h5> 🤍 {props.movie.likes} likes 🤍 </h5>
+        {props.movie.year}
+        <br></br>
+        <h5> ❤️‍🔥 {props.movie.likes} likes ❤️‍🔥 </h5>
         <br></br>
       </h1>
     </div>

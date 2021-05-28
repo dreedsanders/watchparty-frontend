@@ -89,7 +89,7 @@ function SearchBar() {
 
   return (
     <div className="left-panel" style={{ textAlign: "center" }}>
-      <strong>Search Movies By Name:</strong>
+      <strong style={{ color: "ivory" }}>Search Movies By Name:</strong>
       <br />
       <input
         type="text"
@@ -98,23 +98,27 @@ function SearchBar() {
         onChange={(e) => handleMarquee(e)}
       />
       <br />
-      <label>
+      <label style={{ color: "ivory" }}>
         <strong>Filter Genre:</strong>
         {selectGenreOption()}
       </label>
       <br></br>
-      <label>
+      <label style={{ color: "ivory" }}>
         <strong>Filter Director:</strong>
         {selectDirectorOption()}
       </label>
       <br></br>
-      <label>
+      <label style={{ color: "ivory" }}>
         <strong>Filter Starring:</strong>
         {selectStarringOption()}
       </label>
       <br></br>
       <br></br>
-      <button value="reset" onClick={(e) => handleReset(e)}>
+      <button
+        value="reset"
+        onClick={(e) => handleReset(e)}
+        style={{ backgroundColor: "yellow" }}
+      >
         Reset Filters
       </button>
     </div>

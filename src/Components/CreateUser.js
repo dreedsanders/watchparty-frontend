@@ -6,9 +6,8 @@ const CreateUser = (props) => {
   const errormsg = useSelector((state) => state.userState.errormsg);
   return (
     <div className="formcontainer">
-      <div style={{ textAlign: "center" }} className="row">
-        <form onSubmit={props.handleCreateUser} className="form-signin">
-          <h2 className="form-signin-heading">New User Sign Up</h2>
+        <form onSubmit={props.handleCreateUser}>
+          <h2 className="neonText">New User Sign Up</h2>
           <br></br>
           <label className="sr-only">Name</label>
           <input
@@ -58,7 +57,6 @@ const CreateUser = (props) => {
         </form>
         {errormsg ? <strong>{errormsg}</strong> : null}
       </div>
-    </div>
   );
 };
 export default CreateUser;

@@ -1,73 +1,7 @@
-
-.bg_image {
-  background-color: seagreen;
-  /* background-image: url("https://www.nicepng.com/png/detail/21-214920_popcorn-transparent-png-movie-popcorn-transparent.png"); */ 
-position: absolute;
-top: 0;
-width: 100%;
-height: 100%;
-background-size: auto;
+.app {
+  /* background-image: url("https://images.all-free-download.com/images/graphiclarge/film_with_popcorn_cinema_poster_vector_584996.jpg"); */
+  background-image: linear-gradient(rgb(43, 43, 41), rgb(27, 27, 54));
 }
-.form-signin-heading{
-  background-color: rgb(241, 237, 0);
-}
-
-.formcontainer{
-  -ms-text-size-adjust: 20%;
-  display: grid;
-  place-items: center;
-}
-
-.flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 200px;
-  border: 1px solid #f1f1f1;
-  perspective: 1000px; 
-  display: inline-block;
-  /* Remove this if you don't want the 3D effect */
-}
-
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-} 
-
-/* Do an horizontal flip when you move the mouse over the flip box container  */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
- 
-} 
-
-/* Position the front and back side  */
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; 
-  backface-visibility: hidden;
-  
-}  
-
-/* Style the front side (fallback if image is missing)  */
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-} 
-
-/* Style the back side  */
-.flip-card-back {
-  background-color: dodgerblue;
-  color: black;
-  transform: rotateY(180deg);
-  width: 100%;
-  height: 100%;
-} 
 
 .video-responsive {
   overflow: hidden;
@@ -85,14 +19,19 @@ background-size: auto;
 }
 
 ul {
-  list-style-type: '';
+  list-style-type: "";
 }
 
-body, html {
+body,
+html {
   width: 100%;
   height: 100%;
   margin: 0;
-
+}
+.formcontainer {
+  display: grid;
+  place-items: center;
+  flex-wrap: wrap;
 }
 
 .contain {
@@ -101,47 +40,59 @@ body, html {
 }
 
 .left-panel {
-    width: 18%;
+  /* width: 18%;
     height: 22%;
     float: left;
     background-color: rosybrown;
-    border-collapse: collapse;
+    border-collapse: collapse; */
 }
 
 .center-panel {
-    width: 50%;
-    height: 100%;
-    display: inline-block;
-    border-collapse: collapse;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #22323f;
+  padding: 10px;
 }
 
-.right-panel {
-  width: 10%;
-  height: 100%;
-  position: relative;
-  float: right;
-  /* background-color: yellow; */
-  border-collapse: collapse;
+.card {
+  background-color: rgba(123, 197, 247, 0.699);
+  border: 1px solid rgba(250, 231, 126, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
+
 .right-panel1 {
-  width: 25%;
-  height: 25%;
+  width: 33.33%;
+  height: 10%;
   position: relative;
   float: right;
-  /* background-color: yellow; */
-  border-collapse: collapse;
-}
-.right-panel2 {
-  width: 25%;
-  height: 25%;
-  position: relative;
-
-  /* background-color: yellow; */
   border-collapse: collapse;
 }
 
 .top-panel {
-  width: 100%;
-  height: 100px;
-  border-collapse: collapse;
+ color: "ivory";
+  height: 100%;
+  background-color: lightcoral;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
 }
+
+.neonText {
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
+
+.userpage::after {
+   content: "";
+  display: table;
+  clear: both;
+}
+.column{
+   float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+

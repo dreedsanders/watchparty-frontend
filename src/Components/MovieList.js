@@ -11,14 +11,12 @@ function MovieList() {
 
   return (
     <div className="center-panel">
-      <h5>
-        <strong style={{color: "white"}}>Click each to View Movie</strong>
-      </h5>
+
       {clicked ? <MovieShow /> : null}
 
       {!filtering
-        ? movies.map((movie) => <MovieCard movie={movie} />)
-        : filtered.map((movie) => <MovieCard movie={movie} />)}
+        ? movies.map((movie) => <MovieCard movie={movie} />).sort()
+        : filtered.map((movie) => <MovieCard movie={movie} />).sort()}
     </div>
   );
 }

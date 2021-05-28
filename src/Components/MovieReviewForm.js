@@ -8,13 +8,13 @@ function MovieReviewForm(props) {
 
   return (
     <div>
-      <h1>Movie Review Form</h1>
+      <h1 style={{ color: "ivory" }}>Movie Review Form</h1>
       <br></br>
       <img src={currentmovie.fanart} alt="movie poster"></img>
       <br></br>
-      <h3>{currentmovie.title}</h3>
+      <h3 style={{ color: "ivory" }}>{currentmovie.title}</h3>
       <form onSubmit={(e) => props.handleReview(e, history, dispatch)}>
-        <label>Review</label>
+        <label style={{ color: "ivory" }}>Review</label>
         <input type="textarea"></input>
         <br></br>
         <input

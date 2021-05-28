@@ -16,7 +16,7 @@ function ReviewResponse(props) {
   };
 
   return (
-    <div>
+    <div style={{ color: "ivory" }}>
       <h1>Review</h1>
       <h2>"{currentreview.review}"</h2>
       <h5>Responses</h5>

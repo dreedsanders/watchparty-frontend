@@ -21,7 +21,7 @@ function EditUser(props) {
   };
 
   return (
-    <div>
+    <div style={{color: "ivory"}}>
       <form onSubmit={(e) => props.handleEditUser(e, history, dispatch)}>
         <h3>❗️❗️ MUST FILL OUT FORM. VALUES ARE JUST PLACEHOLDERS ❗️❗️</h3>
         <label>Edit Name</label>

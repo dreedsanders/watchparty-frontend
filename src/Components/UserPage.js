@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 function UserPage(props) {
-  let history=useHistory()
+  let history = useHistory()
+  let dispatch = useDispatch()
   let current_user = useSelector((state) => state.userState.current_user);
   let backendmovies = useSelector((state) => state.movieState.backendmovies)[0];
   let reviews = useSelector((state) => state.movieState.reviews);
@@ -38,9 +39,16 @@ function UserPage(props) {
     ).then(props.getMovieWatches);
   };
 
+  let taketoshow = (e, moviewatch) => {
+    e.preventDefault()
+    movie = backendmovies.find(
+      (selectmovie) => selectmovie.id === moviewatch.movie_id);
+      dispatch({type: "CLICKED", currentMovie: movie})
+  }
+
   return (
     <div>
-      <h1>{current_user.name}</h1>
+      <h1 className="neonText">{current_user.name}</h1>
       <br></br>
       <img
         src={current_user.profile_picture}
@@ -48,13 +56,13 @@ function UserPage(props) {
         alt="profile pic"
       ></img>
       <br></br>
-      <h5>{current_user.email}</h5>
+      <h5 style={{ color: "yellow" }}>{current_user.email}</h5>
       <br></br>
       <div>
-        <label>Reviews</label>
+        <label style={{ color: "yellow" }}>Reviews</label>
         <ul>
           {actualreviews.map((review) => (
-            <li>
+            <li style={{ color: "yellow" }}>
               {" "}
               Movie:
               {movie[0].title} - "{review}"
@@ -63,10 +71,10 @@ function UserPage(props) {
         </ul>
       </div>
       <br></br>
-      <h3>Watchlist</h3>
+      <h3 style={{ color: "yellow" }}>Watchlist</h3>
       <div>
         {currentmovies.map((moviewatch) => (
-          <li>
+          <li onClick={(e) => taketoshow(e, moviewatch)}>
             <img
               alt="movie poster"
               src={
@@ -75,7 +83,7 @@ function UserPage(props) {
                 ).poster
               }
             ></img>{" "}
-            <h5>
+            <h5 style={{ color: "ivory" }}>
               {
                 backendmovies.find(
                   (selectmovie) => selectmovie.id === moviewatch.movie_id
@@ -85,6 +93,7 @@ function UserPage(props) {
             <button
               className="btn btn-primary"
               onClick={(e) => handleClick(e, moviewatch)}
+              style={{backgroundColor: "magenta"}}
             >
               Remove from Watchlist
             </button>
@@ -95,11 +104,16 @@ function UserPage(props) {
 
       <button
         className="btn btn-primary"
+        style={{ backgroundColor: "red" }}
         onClick={(e) => props.handleSignOut(e, history)}
       >
         Sign Out
       </button>
-      <Link to="/editprofile" className="btn btn-primary">
+      <Link
+        to="/editprofile"
+        className="btn btn-primary"
+        style={{ backgroundColor: "yellow", color: "black" }}
+      >
         Edit Account
       </Link>
       <span></span>

@@ -13,7 +13,10 @@ const userReducer = (state = initialState, action) => {
         errormsg: action.errormsg,
       };
     case "FAILED":
-      return state;
+      return {
+        ...state,
+        errormsg: action.errormsg
+      }
     case "SIGN_IN":
       return {
         ...state,
@@ -23,8 +26,7 @@ const userReducer = (state = initialState, action) => {
       };
     case "SIGN_OUT":
       return {
-        ...state,
-        logged_in: false
+       initialState
       }
     case "EDIT":
       return {

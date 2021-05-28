@@ -14,6 +14,11 @@ function MovieShow(props) {
   let users = useSelector((state) => state.userState.users);
   let currentuser = useSelector((state) => state.userState.current_user);
   let currentmovie = useSelector((state) => state.movieState.currentMovie);
+  let moviewatches = useSelector((state) => state.movieState.moviewatches[0])
+  let currentwatches = moviewatches.filter(watch => watch.user_id === currentuser.id)
+  let added = currentwatches.find(watch => watch.movie_id === currentmovie.id) //returns array of booleans 
+  console.log(added)
+
 
   let handleBacktoMovies = (e) => {
     e.preventDefault();
@@ -95,7 +100,25 @@ function MovieShow(props) {
       body: JSON.stringify(newwatch),
     };
     fetch("http://localhost:3000/api/v1/movie_watches", reqPack)
+      // .then(res => res.json())
+      // .then(data => console.log(data))
       .then(props.getMovieWatches)
+  };
+
+  let handleRemovefromWatchlist = (e, added) => {
+    e.preventDefault();
+    let reqPack = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch(
+      `http://localhost:3000/api/v1/movie_watches/${added.id}`,
+      reqPack
+    ).then(props.getMovieWatches)
   };
   return (
     <>
@@ -103,7 +126,7 @@ function MovieShow(props) {
         <Respond handleResponseReply={handleResponseReply} />
       ) : (
         <div>
-          <h1>{movie.title}</h1>
+          <h1 style={{ color: "ivory" }}>{movie.title}</h1>
           <br></br>
           <img
             src={movie.fanart}
@@ -111,18 +134,30 @@ function MovieShow(props) {
             alt=""
             style={{ height: "250px" }}
           ></img>
-          <h1>
+          <h1 style={{ color: "ivory" }}>
             {movie.title}:{movie.year}
             <br></br>
             <button className="btn btn-primary" onClick={(e) => handleLikes(e)}>
               Like 🍿 {movie.likes} likes
             </button>
-            <button
+             {added ? (
+                <h4 style={{ color: "red" }}> Added to watchlist
+                   <br></br>
+                <button onClick={(e)=>{handleRemovefromWatchlist(e,added)}}>Remove</button></h4>
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={(e) => addWatchlist(e)}
+              >
+                Add To Watchlist
+              </button>
+            )} 
+            {/* <button
               className="btn btn-primary"
               onClick={(e) => addWatchlist(e)}
             >
               Add To Watchlist
-            </button>
+            </button> */}
             <br></br>
             <Link to="/moviereview" className="btn btn-primary">
               Leave a review
@@ -137,20 +172,29 @@ function MovieShow(props) {
             </button>
             <br></br>
           </h1>
-          <h3>🎬IMDB RATING | {movie.IMDB_rating}🎬</h3>
+          <h3 style={{ color: "ivory" }}>
+            🎬IMDB RATING | {movie.IMDB_rating}🎬
+          </h3>
           <br></br>
-          Directed by:
-          <h5>{movie.directors}</h5>
+          <h5 style={{ color: "ivory" }}>
+            Directed by:
+            <br></br>
+            {movie.directors}
+          </h5>
           <br></br>
-          Starring ⭐:
-          <h5>{movie.starring}</h5>
-          <p>
-            <strong>Description</strong>: {movie.description}
+          <h5 style={{ color: "ivory" }}>
+            Starring ⭐:
+            <br></br>
+            {movie.starring}
+          </h5>
+          <p style={{ color: "ivory" }}>
+            <strong>Description</strong>: <br></br>
+            {movie.description}
           </p>
-          <h3>
+          <h3 style={{ color: "ivory" }}>
             <strong>Reviews</strong>
           </h3>
-          <ul>
+          <ul style={{ color: "ivory" }}>
             {currentreviews
               ? currentreviews.map((review) => (
                   <li style={{ fontSize: "medium" }}>

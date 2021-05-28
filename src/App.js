@@ -6,7 +6,8 @@ import CreateUser from "./Components/CreateUser";
 import SignIn from "./Components/SignIn";
 import MainContainer from "./Containers/MainContainer";
 import MovieReviewForm from "./Components/MovieReviewForm";
-
+import PopcornGame from './Components/PopcornGame'
+import Users from './Components/UsersChat'
 function App() {
   const dispatch = useDispatch();
 
@@ -19,6 +20,7 @@ function App() {
     getMovieWatches();
     getMoviesfromBack();
     getUsers();
+    // question();
   }, []);
 
   const getUsers = () => {
@@ -90,9 +92,10 @@ function App() {
     };
     fetch("http://localhost:3000/api/v1/movies", recPack)
       .then((res) => res.json())
-      .then((data) =>
+      .then((data) => 
         dispatch({ type: "GETBACKENDMOVIES", backendmovies: data })
       );
+    
   };
 
   const handleCreateUser = (e) => {
@@ -114,7 +117,8 @@ function App() {
 
     fetch("http://localhost:3000/api/v1/users", reqPack)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "CREATE_USER", errormsg: data.error }));
+    .then(console.log("Welcome new User!"))
+      .then((data) => dispatch({ type: "CREATE_USER", errormsg: data.error }))
     e.target.reset();
   };
 
@@ -141,18 +145,20 @@ function App() {
         localStorage.setItem("token", data.token);
         localStorage.token !== "undefined"
           ? dispatch({
-              type: "SIGN_IN",
-              current_user: data.user,
-              errormsg: data.error,
-            })
-          : dispatch({ type: "FAILED" });
-      });
+            type: "SIGN_IN",
+            current_user: data.user,
+            errormsg: data.error,
+          })
+          : dispatch({ type: "FAILED", errormsg: data.error });
+      })
+      .then(localStorage.token !== "undefined" ? console.log(`Ayyye what up ${current_user.name}`) : console.log("never found ya"))
   };
 
   const handleSignOut = (e, history) => {
     localStorage.clear();
     dispatch({ type: "SIGN_OUT" });
     dispatch({ type: "LOGOUT" });
+    console.log("Later gator")
   };
 
   const handleEditUser = (e, history, dispatch) => {
@@ -174,7 +180,8 @@ function App() {
     };
     fetch(`http://localhost:3000/api/v1/users/${current_user.id}`, recPack)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "EDIT", current_user: data }));
+      .then((data) => dispatch({ type: "EDIT", current_user: data }))
+    .then(console.log(`Looks like ${current_user.name} needed some changes. Change is good. `))
     e.target.reset();
     history.push("/myaccount");
   };
@@ -204,7 +211,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center" }} className="bg_image">
+    <div style={{ textAlign: "center" }} className="app">
       <Router>
         <Switch>
           <Route exact path="/">
@@ -227,7 +234,11 @@ function App() {
               />
             )}
           ></Route>
-          <Route exact path="/users"></Route>
+          <Route
+            exact
+            path="/users"
+            render={(routerProps) => <Users {...routerProps}/>}
+          ></Route>
           <Route exact path="/moviereview">
             <MovieReviewForm handleReview={handleReview} />
           </Route>
