@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import MainNavBar from "./MainNavBar";
 
 function EditUser(props) {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ function EditUser(props) {
   };
 
   return (
-    <div style={{color: "ivory"}}>
+    <>
+      <MainNavBar />
+    <div style={{color: "black"}}>
       <form onSubmit={(e) => props.handleEditUser(e, history, dispatch)}>
         <h3>❗️❗️ MUST FILL OUT FORM. VALUES ARE JUST PLACEHOLDERS ❗️❗️</h3>
         <label>Edit Name</label>
@@ -42,9 +45,10 @@ function EditUser(props) {
         onClick={() => deleteUser(current_user)}
         style={{ backgroundColor: "red" }}
       >
-        Delete
+        Delete Account
       </button>
-    </div>
+      </div>
+      </>
   );
 }
 export default EditUser;

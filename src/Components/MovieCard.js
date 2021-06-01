@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom"
 
 const MovieCard = (props) => {
   let dispatch = useDispatch();
+  let history = useHistory()
 
   let handleMovieClick = (e) => {
-    e.preventDefault();
     dispatch({ type: "CLICKED", currentMovie: props.movie });
+    history.push("/movieshow")
   };
 
   return (

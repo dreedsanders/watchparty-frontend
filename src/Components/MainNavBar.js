@@ -4,60 +4,71 @@ import UserPage from "../Components/UserPage";
 import EditUser from "../Components/EditUser";
 import PopcornGame from "../Components/PopcornGame";
 
-function MainNavBar(props) {
+function MainNavBar() {
   let history=useHistory()
 
   const goToUser = () => {
-    // e.preventDefault()
     history.push('/users')
+  }
+  const goToMyProfile = () => {
+    history.push('/myaccount')
+  }
+
+  const goToEditProfile = () => {
+    history.push("/editprofile")
+  }
+
+  const goToMovies = () => {
+    history.push("/home")
+  }
+  const goToGame = () => {
+    history.push("/game")
   }
 
 
   return (
     <div className="routes">
-        <nav>
-          <Link to="/myaccount" className="btn btn-primary">
-            My Profile
-          </Link>
-          <span></span>
-          <button className="btn btn-primary" onClick={() => goToUser()}> Users </button>
-          <span></span>
-          <Link to="/home" className="btn btn-primary">
-            Movies
-          </Link>
-          <span></span>
-          <Link to="/editprofile" className="btn btn-primary">
-            EditProfile
-          </Link>
-          <span></span>
-          <Link to="/game" className="btn btn-primary">
-            PLAY GAME
-          </Link>
-          {/* <button className="btn btn-primary" onClick={(e)=>handleGame(e)}>PLAY GAME</button> */}
-          <span></span>
-        </nav>
-        <Route
-          exact
-          path="/myaccount"
-          render={(routerProps) => (
-            <UserPage
-              {...routerProps}
-              handleSignOut={props.handleSignOut}
-              getMovieWatches={props.getMovieWatches}
-            />
-          )}
-        ></Route>
-        <Route
-          exact
-          path="/game"
-          render={(routerProps) => <PopcornGame />}
-        ></Route>
-        <Route
-          path="/editprofile"
-          render={(routerProps) => (
-            <EditUser {...routerProps} handleEditUser={props.handleEditUser} />
-          )}
-        ></Route>
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToMovies()}
+      >
+        {" "}
+        Movies{" "}
+      </button>
+      <span></span>
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToMyProfile()}
+      >
+        Profile
+      </button>
+      <span></span>
+      {/* <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToEditProfile()}
+      >
+        Edit Profile
+      </button>
+      <span></span> */}
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToUser()}
+      >
+        Social
+      </button>
+      <span></span>
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToGame()}
+      >
+        Draw & Chill
+      </button>
+      <span></span>
     </div>
   );
 }

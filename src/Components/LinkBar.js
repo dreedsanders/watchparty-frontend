@@ -1,6 +1,6 @@
 function LinkBar() {
     return (
-      <div>
+      <div className="linkbar">
         <a href="https://github.com/dreedsanders">
           <img
             src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"

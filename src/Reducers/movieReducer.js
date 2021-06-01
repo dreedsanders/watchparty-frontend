@@ -11,6 +11,8 @@ const initialState = {
   clicked: false,
   currentReview: [],
   respond: false,
+  mosttalkedabout: {},
+  mostwatched: {}
 };
 
 const movieReducer = (state = initialState, action) => {
@@ -85,6 +87,21 @@ const movieReducer = (state = initialState, action) => {
         ...state,
         currentMovie: action.currentMovie,
       };
+    case "MOSTTALKEDABOUT":
+      return {
+        ...state,
+        mosttalkedabout: action.mosttalkedabout,
+      }
+    case "MOSTWATCHED":
+      return {
+        ...state,
+        mostwatched: action.mostwatched
+      }
+    case "RANDOM":
+      return {
+        ...state,
+        currentMovie: action.currentMovie
+      }
     default:
       return state;
   }

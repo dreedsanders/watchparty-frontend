@@ -1,30 +1,109 @@
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import MainNavBar from "./MainNavBar";
+import FootBar from "./FootBar";
+import MainConHeader from "./MainConHeader";
 
-function Users() {
-    let users = useSelector((state) => state.userState.users);
-    console.log(users)
-    
-    return (
-      <div className="userpage" style={{color: "ivory"}}>
-            <div className="column">
-                <h2>Users</h2>
-                <br></br>
-                <ul>
-                    {users.map(user => (<li>{user.name}</li>))}
-                </ul>
-            </div>
-            <div className="column">
-                <h2>Chat</h2>
-                <br></br>
-                <label>Post to chat</label>
-                <br></br>
-                <input type="text" ></input>
-        </div>
-            <div className="column">
-                <h3>Stats</h3>
+function Users(props) {
+  let dispatch = useDispatch();
+  let history = useHistory();
+  let users = useSelector((state) => state.userState.users);
+  let chats = useSelector((state) => state.chatState.chats[0]);
+  let mostwatched = useSelector((state) => state.movieState.mostwatched[0]);
+  let mosttalkedabout = useSelector(
+    (state) => state.movieState.mosttalkedabout[0]
+  );
+  // console.log(mostwatched, mosttalkedabout)
+
+  let current_user = useSelector((state) => state.userState.current_user);
+
+  useEffect(() => {}, []);
+
+  const makeChat = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value);
+    let chat = {
+      chat: e.target[0].value,
+      user_id: current_user.id,
+    };
+    let recPack = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(chat),
+    };
+    fetch("http://localhost:3000/api/v1/chats", recPack)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "ADDCHAT", chats: data }))
+      .then(props.getChats);
+    e.target.reset();
+  };
+  const handleMostWatched = (e) => {
+    dispatch({ type: "RANDOM", currentMovie: mostwatched });
+    history.push("/movieshow");
+  };
+  const handleMostTalkedAbout = (e) => {
+    dispatch({ type: "RANDOM", currentMovie: mosttalkedabout });
+    history.push("/movieshow");
+  };
+
+  return (
+    <div style={{ color: "ivory" }}>
+      <MainConHeader />
+      <MainNavBar />
+      <div className="usrinfo" id="left">
+        <ul>
+        <h2>Users</h2>
+          {users.map((user) => (
+            <li>{user.name}</li>
+          ))}
+        </ul>
+        <div className="column2" id="middle">
+          <h2>Chat</h2>
+          <br></br>
+          <ul style={{ color: "yellow" }}>
+            {chats.length > 0 ? (
+              chats.map((chat) => (
+                <li>
+                  {users.find((user) => user.id === chat.user_id).name} -{" "}
+                  {chat.chat}
+                </li>
+              ))
+            ) : (
+              <p>NO ONE CHATTING YET :(</p>
+            )}
+          </ul>
+          <form onSubmit={(e) => makeChat(e)}>
+            <input type="text" style={{ color: "black" }}></input>
+            <input
+              type="submit"
+              value="Post"
+              style={{ backgroundColor: "blue", color: "yellow" }}
+            ></input>
+          </form>
         </div>
       </div>
-    );
+      <div className="column3" id="right">
+        <h3>Stats</h3>
+        <div className="stats">
+          <div onClick={(e) => handleMostWatched(e)}>
+            <h4 className="neonText">Most Watched</h4>
+            <h5>{mostwatched.title}</h5>
+            <img src={mostwatched.poster}></img>
+          </div>
+          <div onClick={(e) => handleMostTalkedAbout(e)}>
+            <h4 className="neonText">Most Talked About</h4>
+            <h5>{mosttalkedabout.title}</h5>
+            <img src={mosttalkedabout.poster}></img>
+          </div>
+        </div>
+      </div>
+      <FootBar />
+    </div>
+  );
 }
-export default Users
+export default Users;

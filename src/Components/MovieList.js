@@ -11,9 +11,6 @@ function MovieList() {
 
   return (
     <div className="center-panel">
-
-      {clicked ? <MovieShow /> : null}
-
       {!filtering
         ? movies.map((movie) => <MovieCard movie={movie} />).sort()
         : filtered.map((movie) => <MovieCard movie={movie} />).sort()}

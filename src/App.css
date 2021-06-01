@@ -1,15 +1,35 @@
+/* App wide CSS */
+ul {
+  list-style-type: "";
+}
+/* End App wide CSS */
+
+
+/* MAIN PARENT ELEMENT */
 .app {
-  /* background-image: url("https://images.all-free-download.com/images/graphiclarge/film_with_popcorn_cinema_poster_vector_584996.jpg"); */
-  background-image: linear-gradient(rgb(43, 43, 41), rgb(27, 27, 54));
+  background-color: rgb(6, 29, 39);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+}
+/* END MAIN PARENT ELEMENT */
+
+.respond{
+  align-self: center;
+  padding: 45%;
+}
+.review {
+  align-self: center;
+  padding: 45%;
 }
 
+/* Video CSS */
 .video-responsive {
   overflow: hidden;
   padding-bottom: 56.25%;
   position: relative;
   height: 0;
 }
-
 .video-responsive iframe {
   left: 0;
   top: 0;
@@ -17,82 +37,188 @@
   width: 100%;
   position: absolute;
 }
-
-ul {
-  list-style-type: "";
-}
-
-body,
-html {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-.formcontainer {
-  display: grid;
-  place-items: center;
-  flex-wrap: wrap;
-}
-
-.contain {
-  width: 100%;
-  height: 100%;
-}
-
-.left-panel {
-  /* width: 18%;
-    height: 22%;
-    float: left;
-    background-color: rosybrown;
-    border-collapse: collapse; */
-}
-
-.center-panel {
+.right-panel1 {
   display: grid;
   grid-template-columns: auto auto auto;
-  background-color: #22323f;
   padding: 10px;
 }
-
-.card {
-  background-color: rgba(123, 197, 247, 0.699);
-  border: 1px solid rgba(250, 231, 126, 0.8);
+.vid{
+  background-color: rgba(8, 40, 61, 0.699);
   padding: 20px;
   font-size: 30px;
   text-align: center;
 }
+/* End Video CSS */
 
-.right-panel1 {
-  width: 33.33%;
-  height: 10%;
-  position: relative;
-  float: right;
-  border-collapse: collapse;
+
+
+/* Left side Filter and news CSS */
+.left-panel {
+  float: left;
+  background-color: rgb(6, 29, 39);
+  background-size: cover;
+  height: 100vh;
 }
+/* end Left side Filter and news CSS*/
 
+
+
+/* Movie List Container CSS */
+.center-panel {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #22323f;
+  background-size: cover;
+  /* padding: 10px; */
+}
+/* each movie card in movie list */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  background-color: rgba(8, 40, 61, 0.699);
+  border: 1px solid rgba(250, 231, 126, 0.8);
+  padding: 10px;
+  color: ivory
+}
+/* End movie list CSS */
+
+
+
+/* Marquee */
 .top-panel {
- color: "ivory";
-  height: 100%;
-  background-color: lightcoral;
+  background-color: rgb(38, 38, 59);
+  color: "ivory";
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
 }
+/* End marquee */
 
+
+
+/* Glow CSS */
 .neonText {
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
+/* End Glow CSS */
+
+
+
+
+/* Social Page */
+.userpage {
+  display: flex;
+  flex-direction: column;
 }
 
-.userpage::after {
-   content: "";
-  display: table;
-  clear: both;
+.stats { 
+  display: flex;
+  justify-content: space-evenly;
 }
-.column{
-   float: left;
-  width: 33.33%;
-  padding: 10px;
+
+/* end social page */
+
+
+
+
+
+/* personal linkbar */
+.linkbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 25px
+}
+/* End personal linkbar */
+
+
+
+
+/* UserPage Watchlist */
+.profcard{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+/* End User Watchlist */
+
+
+
+
+/* Footer section */
+.footbarcontain{
+  color: rgb(151, 151, 151);
+  background-color: rgb(6, 29, 39);
+  display: flex;
+  align-self: flex-end;
+  padding: 0 200px;
+  padding-top: 50px;
+}
+/* End footer section */
+
+
+
+
+
+/* CREATE USER */
+.formcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+/* END CREATE USER */
+
+
+/* SIGN IN */
+.formcontainer2 {
+  display: flex;
+  align-self: center;
+  padding-left: 45%;
+}
+/* END SIGN IN */
+
+
+
+
+/* Landing page */
+.showcase{
+  display: flex;
+  flex-direction: column;
+  background-image: url("./img/landing.jpg");
+  background-position: center; 
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+/* end landing page */
+
+
+.ml12 {
+  color: ivory;
+  font-weight: 200;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.ml12 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.show{
+  align-self: center;
+  padding: 45%;
+}
+
+.usrinfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 

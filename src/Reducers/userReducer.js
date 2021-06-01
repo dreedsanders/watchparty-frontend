@@ -3,6 +3,7 @@ const initialState = {
   errormsg: "",
   current_user: {},
   users: {},
+  hall: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         users: action.users,
       };
+    case "HALL":
+      return {
+        ...state,
+        hall: true
+      }
     case "DELETE":
       return state;
     default:

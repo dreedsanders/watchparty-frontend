@@ -35,7 +35,7 @@ function SearchBar() {
       return <option value={g}>{g}</option>;
     };
     return (
-      <select onChange={(e) => handleGenre(e)}>{unique.map(makeOption)}</select>
+      <select style={{color: "black"}}onChange={(e) => handleGenre(e)}>{unique.map(makeOption)}</select>
     );
   }
 
@@ -55,7 +55,7 @@ function SearchBar() {
       return <option value={d}>{d}</option>;
     };
     return (
-      <select onChange={(e) => handleDirector(e)}>
+      <select style={{ color: "black" }} onChange={(e) => handleDirector(e)}>
         {unique.map(makeOption)}
       </select>
     );
@@ -77,7 +77,7 @@ function SearchBar() {
       return <option value={s}>{s}</option>;
     };
     return (
-      <select onChange={(e) => handleStarring(e)}>
+      <select style={{ color: "black" }} onChange={(e) => handleStarring(e)}>
         {unique.map(makeOption)}
       </select>
     );
@@ -100,16 +100,19 @@ function SearchBar() {
       <br />
       <label style={{ color: "ivory" }}>
         <strong>Filter Genre:</strong>
+        <br></br>
         {selectGenreOption()}
       </label>
       <br></br>
       <label style={{ color: "ivory" }}>
         <strong>Filter Director:</strong>
+        <br></br>
         {selectDirectorOption()}
       </label>
       <br></br>
       <label style={{ color: "ivory" }}>
         <strong>Filter Starring:</strong>
+        <br></br>
         {selectStarringOption()}
       </label>
       <br></br>
@@ -121,6 +124,35 @@ function SearchBar() {
       >
         Reset Filters
       </button>
+      <br></br>
+      <div className="linkbar">
+        <br></br>
+        <a href="https://github.com/dreedsanders">
+          <img
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            width="50px"
+            height="50px"
+          ></img>
+        </a>
+        <br></br>
+        <br></br>
+        <a href="https://www.linkedin.com/in/donovan-sanders-22308928/">
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-linkedin-circle-512.png"
+            width="50px"
+            height="50px"
+          ></img>
+        </a>
+        <br></br>
+        <a href="https://thedinnertabletalk.medium.com/">
+          <img
+            src="https://cdn0.iconfinder.com/data/icons/social-media-2092/100/social-62-512.png"
+            width="50px"
+            height="50px"
+          ></img>
+        </a>
+      </div>
+      <h4 style={{ color: "ivory" }}>Follow Here ^</h4>
     </div>
   );
 }

@@ -12,6 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      {/* <PopcornGame /> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

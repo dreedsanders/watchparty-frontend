@@ -4,11 +4,13 @@ import { combineReducers, applyMiddleware } from 'redux'
 import movieReducer from './Reducers/movieReducer'
 import userReducer from './Reducers/userReducer'
 import gameReducer from './Reducers/gameReducer'
+import chatReducer from './Reducers/chatReducer'
 
 const rootReducer = combineReducers({
   movieState: movieReducer,
   userState: userReducer,
-  gameState: gameReducer
+  gameState: gameReducer,
+  chatState: chatReducer
 })
 
 const store = createStore(

@@ -11,12 +11,12 @@ function ReviewResponse(props) {
   );
 
   let handleBackToMovie = (e) => {
-    e.preventDefault();
     dispatch({ type: "BACKTOMOVIE" });
+    history.push('/movieshow')
   };
 
   return (
-    <div style={{ color: "ivory" }}>
+    <div style={{ color: "ivory" }} className="respond">
       <h1>Review</h1>
       <h2>"{currentreview.review}"</h2>
       <h5>Responses</h5>
@@ -27,15 +27,20 @@ function ReviewResponse(props) {
       <h4>Reply to Review</h4>
       <form onSubmit={(e) => props.handleResponseReply(e, history, dispatch)}>
         <label>Response</label>
-        <input type="textarea"></input>
+        <input type="textarea" style={{ color: "black" }}></input>
         <br></br>
         <input
           type="submit"
           className="btn btn-primary"
+          style={{ backgroundColor: "black" }}
           value="Publish"
         ></input>
       </form>
-      <button className="btn btn-primary" onClick={(e) => handleBackToMovie(e)}>
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={(e) => handleBackToMovie(e)}
+      >
         Back To Movie
       </button>
     </div>

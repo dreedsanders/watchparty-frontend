@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import MainNavBar from "./MainNavBar";
+import FootBar from "./FootBar"
+import MainConHeader from "./MainConHeader"
 
 function UserPage(props) {
   let history = useHistory()
@@ -25,6 +28,7 @@ function UserPage(props) {
 
   let handleClick = (e, moviewatch) => {
     e.preventDefault();
+    console.log(moviewatch)
     let reqPack = {
       method: "DELETE",
       headers: {
@@ -46,77 +50,105 @@ function UserPage(props) {
       dispatch({type: "CLICKED", currentMovie: movie})
   }
 
+  let handleMovieClick = (moviewatch) => {
+    movie = backendmovies.find((selectmovie) => selectmovie.id === moviewatch.movie_id);
+    dispatch({ type: "CLICKED", currentMovie: movie });
+    history.push("/movieshow");
+  };
+
   return (
     <div>
-      <h1 className="neonText">{current_user.name}</h1>
-      <br></br>
-      <img
-        src={current_user.profile_picture}
-        style={{ width: "100px" }}
-        alt="profile pic"
-      ></img>
-      <br></br>
-      <h5 style={{ color: "yellow" }}>{current_user.email}</h5>
-      <br></br>
       <div>
-        <label style={{ color: "yellow" }}>Reviews</label>
-        <ul>
-          {actualreviews.map((review) => (
-            <li style={{ color: "yellow" }}>
-              {" "}
-              Movie:
-              {movie[0].title} - "{review}"
-            </li>
-          ))}
-        </ul>
+        <MainConHeader />
+        <MainNavBar />
       </div>
-      <br></br>
-      <h3 style={{ color: "yellow" }}>Watchlist</h3>
-      <div>
-        {currentmovies.map((moviewatch) => (
-          <li onClick={(e) => taketoshow(e, moviewatch)}>
+      <div classname="usr">
+        <div className="usrinfo">
+          <div>
+            <h1 className="neonText">{current_user.name}</h1>
+            <br></br>
             <img
-              alt="movie poster"
-              src={
-                backendmovies.find(
-                  (selectmovie) => selectmovie.id === moviewatch.movie_id
-                ).poster
-              }
-            ></img>{" "}
-            <h5 style={{ color: "ivory" }}>
-              {
-                backendmovies.find(
-                  (selectmovie) => selectmovie.id === moviewatch.movie_id
-                ).title
-              }
-            </h5>
+              src={current_user.profile_picture}
+              style={{ width: "100px" }}
+              alt="profile pic"
+            ></img>
+            <br></br>
+            <h5 style={{ color: "ivory" }}>{current_user.email}</h5>
+            <br></br>
             <button
               className="btn btn-primary"
-              onClick={(e) => handleClick(e, moviewatch)}
-              style={{backgroundColor: "magenta"}}
+              style={{ backgroundColor: "red" }}
+              onClick={(e) => props.handleSignOut(e, history)}
             >
-              Remove from Watchlist
+              Sign Out
             </button>
-            <br></br>
-          </li>
-        ))}
+            <Link
+              to="/editprofile"
+              className="btn btn-primary"
+              style={{ backgroundColor: "yellow", color: "black" }}
+            >
+              Edit Account
+            </Link>
+          </div>
+          <br></br>
+          <div>
+            <h3 style={{ color: "ivory" }}>Reviews</h3>
+            <ul>
+              {actualreviews.length > 0 ? (
+                actualreviews.map((review) => (
+                  <li style={{ color: "ivory" }}>
+                    {" "}
+                    Movie:
+                    {movie[0].title} - "{review}"
+                  </li>
+                ))
+              ) : (
+                <h4 style={{ color: "magenta" }}>
+                  Go leave your first review!
+                </h4>
+              )}
+            </ul>
+          </div>
+        </div>
+        <br></br>
+        <h3 style={{ color: "ivory" }}>Watchlist</h3>
+        <div className="profcard">
+          {currentmovies.length > 0 ? (
+            currentmovies.map((moviewatch) => (
+              <li onClick={() => handleMovieClick(moviewatch)}>
+                <img
+                  alt="movie poster"
+                  src={
+                    backendmovies.find(
+                      (selectmovie) => selectmovie.id === moviewatch.movie_id
+                    ).poster
+                  }
+                ></img>{" "}
+                <h5 style={{ color: "ivory" }}>
+                  {
+                    backendmovies.find(
+                      (selectmovie) => selectmovie.id === moviewatch.movie_id
+                    ).title
+                  }
+                </h5>
+                <button
+                  className="btn btn-primary"
+                  style={{ backgroundColor: "black" }}
+                  onClick={(e) => handleClick(e, moviewatch)}
+                >
+                  Remove from Watchlist
+                </button>
+                <br></br>
+              </li>
+            ))
+          ) : (
+            <h4 style={{ color: "ivory" }}>Go add a movie!</h4>
+          )}
+        </div>
       </div>
-
-      <button
-        className="btn btn-primary"
-        style={{ backgroundColor: "red" }}
-        onClick={(e) => props.handleSignOut(e, history)}
-      >
-        Sign Out
-      </button>
-      <Link
-        to="/editprofile"
-        className="btn btn-primary"
-        style={{ backgroundColor: "yellow", color: "black" }}
-      >
-        Edit Account
-      </Link>
-      <span></span>
+      <div className="usrfoot">
+        <FootBar />
+      </div>
     </div>
   );
 }

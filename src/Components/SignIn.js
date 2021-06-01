@@ -7,7 +7,7 @@ const SignIn = (props) => {
   const errormsg = useSelector((state) => state.userState.errormsg);
 
   return (
-    <div className="formcontainer">
+    <div className="formcontainer2">
       <form onSubmit={(e) => props.handleLogin(e)}>
         <h2 className="neonText">Sign In</h2>
         <br></br>
@@ -34,7 +34,7 @@ const SignIn = (props) => {
         </Link>
       </form>
       {errormsg ? <strong>{errormsg}</strong> : null}
-      {logged_in ? <Redirect to="/home" /> : <Redirect to="/signin" />}
+      {logged_in ? <Redirect to="/watchparty" /> : <Redirect to="/signin" />}
     </div>
   );
 };
