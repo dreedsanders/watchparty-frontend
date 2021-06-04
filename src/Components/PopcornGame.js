@@ -1,13 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
+import MainNavBar from "./MainNavBar"
 
 
 function PopcornGame() {
+
+  window.addEventListener("keydown", logKey);
+  function logKey(e) {
+  }
 
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
   let bucketImg = document.createElement("img")
-  bucketImg.src="bucket.png" 
+  bucketImg.src =
+    ""; 
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,12 +31,28 @@ function PopcornGame() {
     contextRef.current = context
   }, [])
 
+   function Basket() {
+
+     this.show = function () {
+       contextRef.current.drawImage(bucketImg, 150, 100);
+     };
+     this.left = function () {
+       this.x = this.x - 65;
+     };
+     this.right = function () {
+       this.x = this.x + 65;
+     };
+   }
+
+   let basket = new Basket();
+
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent
     // contextRef.drawImage(bucketImg, off);
     contextRef.current.beginPath()
     contextRef.current.moveTo(offsetX, offsetY)
     setIsDrawing(true)
+
 
   }
 
@@ -47,17 +69,24 @@ function PopcornGame() {
     const { offsetX, offsetY } = nativeEvent
     contextRef.current.lineTo(offsetX, offsetY)
     contextRef.current.stroke()
+        basket.show();
     
   }
 
   return (
     <div>
+      <MainNavBar />
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={endDrawing}
         onMouseMove={draw}
-      ref={canvasRef}>
-      </canvas>
+        ref={canvasRef}
+      ></canvas>
+      {/* <img
+        src={
+          "https://lh3.googleusercontent.com/proxy/Z93AdNXvBUqFwIQvO7hfhai8PDyN3053OgGPu2z6SpIp58RWvNqMDhl9a2BPgWm57i-gycFFc1MmrvnAQz22k4jLVQ"
+        }
+      ></img> */}
     </div>
   );
 }

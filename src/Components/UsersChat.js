@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainNavBar from "./MainNavBar";
 import FootBar from "./FootBar";
 import MainConHeader from "./MainConHeader";
+import SocialUser from "./SocialUser";
 
 function Users(props) {
   let dispatch = useDispatch();
@@ -14,7 +15,6 @@ function Users(props) {
   let mosttalkedabout = useSelector(
     (state) => state.movieState.mosttalkedabout[0]
   );
-  // console.log(mostwatched, mosttalkedabout)
 
   let current_user = useSelector((state) => state.userState.current_user);
 
@@ -22,7 +22,6 @@ function Users(props) {
 
   const makeChat = (e) => {
     e.preventDefault();
-    console.log(e.target[0].value);
     let chat = {
       chat: e.target[0].value,
       user_id: current_user.id,
@@ -50,17 +49,20 @@ function Users(props) {
     dispatch({ type: "RANDOM", currentMovie: mosttalkedabout });
     history.push("/movieshow");
   };
+  
 
   return (
     <div style={{ color: "ivory" }}>
       <MainConHeader />
+      <br></br>
+      <br></br>
       <MainNavBar />
       <div className="usrinfo" id="left">
         <ul>
-        <h2>Users</h2>
-          {users.map((user) => (
-            <li>{user.name}</li>
-          ))}
+          <h2>Users</h2>
+          <h5 style={{color: "yellow"}}>Click each user to view watchlist</h5>
+          {users.map((user) => {return <SocialUser user={user} key={user.id} />}
+          )}
         </ul>
         <div className="column2" id="middle">
           <h2>Chat</h2>
@@ -91,14 +93,14 @@ function Users(props) {
         <h3>Stats</h3>
         <div className="stats">
           <div onClick={(e) => handleMostWatched(e)}>
-            <h4 className="neonText">Most Watched</h4>
+            <h4 className="neonText">Most Watched Movie</h4>
             <h5>{mostwatched.title}</h5>
-            <img src={mostwatched.poster}></img>
+            <img src={mostwatched.poster} alt="mostwatched"></img>
           </div>
           <div onClick={(e) => handleMostTalkedAbout(e)}>
-            <h4 className="neonText">Most Talked About</h4>
+            <h4 className="neonText">Most Talked About Movie</h4>
             <h5>{mosttalkedabout.title}</h5>
-            <img src={mosttalkedabout.poster}></img>
+            <img src={mosttalkedabout.poster} alt="mosttalked"></img>
           </div>
         </div>
       </div>

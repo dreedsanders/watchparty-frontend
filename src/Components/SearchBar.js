@@ -35,7 +35,9 @@ function SearchBar() {
       return <option value={g}>{g}</option>;
     };
     return (
-      <select style={{color: "black"}}onChange={(e) => handleGenre(e)}>{unique.map(makeOption)}</select>
+      <select style={{ color: "black" }} onChange={(e) => handleGenre(e)}>
+        {unique.map(makeOption)}
+      </select>
     );
   }
 
@@ -52,7 +54,7 @@ function SearchBar() {
       ...new Set(allmovies.map((movie) => movie.directors)),
     ].sort();
     let makeOption = function (d) {
-      return <option value={d}>{d}</option>;
+      return <option value={d}>{d} </option>;
     };
     return (
       <select style={{ color: "black" }} onChange={(e) => handleDirector(e)}>
@@ -132,6 +134,7 @@ function SearchBar() {
             src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
             width="50px"
             height="50px"
+            alt="github"
           ></img>
         </a>
         <br></br>
@@ -141,6 +144,7 @@ function SearchBar() {
             src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-linkedin-circle-512.png"
             width="50px"
             height="50px"
+            alt="linkedin"
           ></img>
         </a>
         <br></br>
@@ -149,6 +153,7 @@ function SearchBar() {
             src="https://cdn0.iconfinder.com/data/icons/social-media-2092/100/social-62-512.png"
             width="50px"
             height="50px"
+            alt="medium"
           ></img>
         </a>
       </div>

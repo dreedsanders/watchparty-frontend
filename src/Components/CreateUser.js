@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import { useSelector } from "react-redux";
 import FootBar from "../Components/FootBar"
-import LowBar from "../Components/LowBar";
+// import LowBar from "../Components/LowBar";
 
 const CreateUser = (props) => {
   const errormsg = useSelector((state) => state.userState.errormsg);
+  let created = useSelector((state) => state.userState.created)
   return (
     <div className="formcontainer">
       <form onSubmit={props.handleCreateUser}>
@@ -57,8 +58,9 @@ const CreateUser = (props) => {
           Sign in
         </Link>
       </form>
-      {errormsg ? <strong>{errormsg}</strong> : null}
+      
       <FootBar />
+      {created ? <Redirect to="/signin" /> : errormsg ? <strong>{errormsg}</strong> : null}
     </div>
   );
 };

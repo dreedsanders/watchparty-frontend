@@ -1,19 +1,16 @@
 import React from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {  useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Landing() {
     const dispatch = useDispatch()
     const history = useHistory()
-  const hall = useSelector((state) => state.userState.hall)
-  const user = useSelector((state) => state.userState.current_user)
-  console.log(user)
+  // const hall = useSelector((state) => state.userState.hall)
 
     const handleEnter = (e) => {
         e.preventDefault()
         dispatch({ type: "HALL" })
         history.push("/home")
-        console.log("click")
   };
     
   return (
@@ -21,7 +18,13 @@ function Landing() {
       <h1 style={{ color: "ivory" }}>Coming to Watch?</h1>
       <br></br>
       <div className="landingnav">
-        <button onClick={handleEnter}>Movie Room</button>
+        <button
+          onClick={handleEnter}
+          className="btn btn-primary"
+          style={{ backgroundColor: "black" }}
+        >
+          Movie Room
+        </button>
       </div>
     </div>
   );

@@ -1,8 +1,5 @@
-import { BrowserRouter as Router, Route, Link, useHistory} from "react-router-dom";
+import {  useHistory} from "react-router-dom";
 import React from "react";
-import UserPage from "../Components/UserPage";
-import EditUser from "../Components/EditUser";
-import PopcornGame from "../Components/PopcornGame";
 
 function MainNavBar() {
   let history=useHistory()
@@ -14,15 +11,18 @@ function MainNavBar() {
     history.push('/myaccount')
   }
 
-  const goToEditProfile = () => {
-    history.push("/editprofile")
-  }
+  // const goToEditProfile = () => {
+  //   history.push("/editprofile")
+  // }
 
   const goToMovies = () => {
     history.push("/home")
   }
   const goToGame = () => {
     history.push("/game")
+  }
+  const goToMedia = () => {
+    history.push("/media")
   }
 
 
@@ -67,6 +67,14 @@ function MainNavBar() {
         onClick={() => goToGame()}
       >
         Draw & Chill
+      </button>
+      <span></span>
+      <button
+        className="btn btn-primary"
+        style={{ backgroundColor: "black" }}
+        onClick={() => goToMedia()}
+      >
+        Media
       </button>
       <span></span>
     </div>

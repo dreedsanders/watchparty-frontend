@@ -7,16 +7,14 @@ import MovieList from "../Components/MovieList";
 import SearchBar from "../Components/SearchBar";
 import VideoClip from "../Components/VideoClip";
 import FootBar from "../Components/FootBar";
-import LowBar from "../Components/LowBar";
-import useSound from "use-sound"
-import boop from "../boop.mp3"
-import {Howl, Howler } from "howler"
+
 
 function MainContainer(props) {
   let history = useHistory();
   let dispatch = useDispatch();
   const logged_in = useSelector((state) => state.userState.logged_in);
   const movies = useSelector((state) => state.movieState.backendmovies[0]);
+  let currentuser = useSelector((state) => state.userState.current_user)
 
 
   const handleRandom = (props) => {
@@ -25,50 +23,54 @@ function MainContainer(props) {
     history.push("/movieshow");
   };
 
-  return (
+  return ( 
     <div className="maincontain">
-      <MainConHeader />
-      <br></br>
-      <br></br>
-      <MainNavBar
-        handleSignOut={props.handleSignOut}
-        handleEditUser={props.handleEditUser}
-        getMovieWatches={props.getMovieWatches}
-      />
-      <VideoClip />
-      <br></br>
-      <SearchBar />
-      <br></br>
-      <div className="abovelist">
-        <h5 className="neonText">
-          <strong style={{ color: "white" }}>
-            Click each to View Movie Card
+      {currentuser !== {} &&
+        <>
+          <MainConHeader />
+          <br></br>
+          <br></br>
+          <MainNavBar
+            handleSignOut={props.handleSignOut}
+            handleEditUser={props.handleEditUser}
+            getMovieWatches={props.getMovieWatches}
+          />
+          <VideoClip />
+          <br></br>
+        {movies !== [] &&  <SearchBar />}
+          <br></br>
+          <div className="abovelist">
+            <h5 className="neonText">
+              <strong style={{ color: "white" }}>
+                Click each to View Movie Card
           </strong>
-          <br></br>
-          <br></br>
+              <br></br>
+              <br></br>
           Where you can leave a review, respond to reviews,
           <br></br>
           add to your watchlist, and "like" each movie.
           <br></br>
-          <span></span>
-          <br></br>
+              <span></span>
+              <br></br>
           Click Popcorn for Random Movie
           <br></br>
-          <span></span>
-        </h5>
-  <img
-          src="https://pngimg.com/uploads/popcorn/popcorn_PNG41.png"
-          style={{
-            height: "80px",
-            paddingBottom: "10px",
-          }}
-          onClick={(e) => handleRandom(e)}
-        ></img>
-      </div>
-      <MovieList />
+              <span></span>
+            </h5>
+            <img
+              src="https://pngimg.com/uploads/popcorn/popcorn_PNG41.png"
+              alt="random pop"
+              style={{
+                height: "80px",
+                paddingBottom: "10px",
+              }}
+              onClick={(e) => handleRandom(e)}
+            ></img>
+          </div>
+          <MovieList />
 
-      {!logged_in ? props.history.push("/signin") : null}
-      <FootBar />
+          {/* {!logged_in ? props.history.push("/signin") : null} */}
+          <FootBar />
+        </>}
     </div>
   );
 }

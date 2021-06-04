@@ -1,11 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MainNavBar from "./MainNavBar";
+import MainConHeader from "./MainConHeader";
+import { useState } from 'react'
+import EditName from "./EditName"
+import EditPassword from "./EditPassword"
+import EditEmail from "./EditEmail"
+import EditProfilePicture from "./EditProfilePicture"
 
 function EditUser(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   let current_user = useSelector((state) => state.userState.current_user);
+  const [name, setName] = useState(false)
+  const [password, setPassword] = useState(false)
+  const [email, setEmail] = useState(false)
+  const [profile, setProfile] = useState(false)
 
   let deleteUser = (user) => {
     let reqPack = {
@@ -21,34 +31,74 @@ function EditUser(props) {
     );
   };
 
+  let handleName = (e) => {
+    e.preventDefault()
+    setName(!name)
+  }
+  let handlePassword = (e) => {
+    e.preventDefault();
+    setPassword(!password);
+  };
+  let handleEmail = (e) => {
+    e.preventDefault();
+    setEmail(!email);
+  };
+  let handleProfile = (e) => {
+    e.preventDefault();
+    setProfile(!profile);
+  };
+
   return (
-    <>
-      <MainNavBar />
-    <div style={{color: "black"}}>
-      <form onSubmit={(e) => props.handleEditUser(e, history, dispatch)}>
-        <h3>❗️❗️ MUST FILL OUT FORM. VALUES ARE JUST PLACEHOLDERS ❗️❗️</h3>
-        <label>Edit Name</label>
-        <input type="text" placeholder={current_user.name}></input>
+    <div className="show">
+      <div className="header">
+        <MainConHeader />
         <br></br>
-        <label>Edit Password</label>
-        <input type="text" placeholder="Current or New Password"></input>
         <br></br>
-        <label>Edit Profile Picture</label>
-        <input type="text" placeholder={current_user.profile_picture}></input>
-        <br></br>
-        <label>Edit Email</label>
-        <input type="text" placeholder={current_user.email}></input>
-        <br></br>
-        <input type="submit" className="btn btn-primary"></input>
-      </form>
-      <button
-        onClick={() => deleteUser(current_user)}
-        style={{ backgroundColor: "red" }}
-      >
-        Delete Account
-      </button>
+        <MainNavBar />
       </div>
-      </>
+      <div className="beody">
+        <div style={{ color: "black" }} className="beodycolumn1">
+          <br></br>
+          <label style={{ color: "ivory" }}>
+            What would you like to change?
+          </label>
+          <br></br>
+          <button className="btn btn-primary" onClick={(e) => handleName(e)}>
+            Name
+          </button>
+          {name ? <EditName getUsers={props.getUsers} /> : null}
+          <br></br>
+          <button
+            className="btn btn-primary"
+            onClick={(e) => handlePassword(e)}>
+            Password
+          </button>
+          {password ? <EditPassword getUsers={props.getUsers} /> : null}
+          <br></br>
+          <button className="btn btn-primary" onClick={(e) => handleEmail(e)}>
+            Email
+          </button>
+          {email ? <EditEmail getUsers={props.getUsers} /> : null}
+          <br></br>
+          <button className="btn btn-primary" onClick={(e) => handleProfile(e)}>
+            Profile Picture
+          </button>
+          {profile ? <EditProfilePicture getUsers={props.getUsers} /> : null}
+          <br></br>
+          <br></br>
+          {/* <input type="submit" className="btn btn-primary" style={{backgroundColor: "yellow", color: "black"}}></input> */}
+          <br></br>
+          <br></br>
+          <button
+            className="btn btn-primary"
+            onClick={() => deleteUser(current_user)}
+            style={{ backgroundColor: "red" }}
+          >
+            Delete Account
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 export default EditUser;

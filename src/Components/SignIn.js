@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MainConHeader from "../Components/MainConHeader";
 
 const SignIn = (props) => {
   const logged_in = useSelector((state) => state.userState.logged_in);
@@ -8,6 +9,11 @@ const SignIn = (props) => {
 
   return (
     <div className="formcontainer2">
+      {/* <div className="header">
+        <MainConHeader />
+        <br></br>
+        <br></br>
+      </div> */}
       <form onSubmit={(e) => props.handleLogin(e)}>
         <h2 className="neonText">Sign In</h2>
         <br></br>

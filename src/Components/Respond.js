@@ -20,9 +20,9 @@ function ReviewResponse(props) {
       <h1>Review</h1>
       <h2>"{currentreview.review}"</h2>
       <h5>Responses</h5>
-      {currentresponses.map((response) => (
+      <ul>{currentresponses.map((response) => (
         <li>{response.response}</li>
-      ))}
+      ))}</ul>
       <br></br>
       <h4>Reply to Review</h4>
       <form onSubmit={(e) => props.handleResponseReply(e, history, dispatch)}>

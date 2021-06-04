@@ -23,7 +23,6 @@ const MovieCard = (props) => {
         <br></br>
         {props.movie.year}
         <br></br>
-        <h5> ❤️‍🔥 {props.movie.likes} likes ❤️‍🔥 </h5>
         <br></br>
       </h1>
     </div>

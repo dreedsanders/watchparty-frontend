@@ -1,11 +1,11 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useHistory,
+  // useHistory,
 } from "react-router-dom";
 import CreateUser from "./Components/CreateUser";
 import SignIn from "./Components/SignIn";
@@ -18,29 +18,33 @@ import EditUser from "./Components/EditUser";
 import MovieShow from "./Components/MovieShow";
 import Respond from "./Components/Respond";
 import Landing from "./Components/LandingPage";
-import FootBar from "./Components/FootBar";
+import WarnerBros from "./Components/WarnerBros"
 
 function App() {
   let dispatch = useDispatch();
-  let history = useHistory();
+  // let history = useHistory();
 
   let current_user = useSelector((state) => state.userState.current_user);
   let currentMovie = useSelector((state) => state.movieState.currentMovie);
   let currentreview = useSelector((state) => state.movieState.currentReview);
   let currentuser = useSelector((state) => state.userState.current_user);
+  // let loggedin = useSelector((state) => state.userState.logged_in)
+  let token = localStorage.getItem("token")
+
 
   useEffect(() => {
-    getReviews();
-    getResponses();
-    getMovieWatches();
-    getMoviesfromBack();
-    getUsers();
-    getChats();
-    // getfanfav();
-    getmosttalkedabout();
-    getmostwatched();
-    // question();
-  }, []);
+    if (token !== "undefined") {
+      getUsers();
+      getReviews();
+      getResponses();
+      getMovieWatches();
+      getMoviesfromBack();
+      getChats();
+      getmosttalkedabout();
+      getmostwatched();
+      getLikes();
+    }
+  }, [token]);
 
   const getUsers = () => {
     let reqPack = {
@@ -54,6 +58,20 @@ function App() {
     fetch("http://localhost:3000/api/v1/users", reqPack)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "USERS", users: data }));
+  };
+
+  const getLikes = () => {
+    let reqPack = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch("http://localhost:3000/api/v1/likes", reqPack)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "GETLIKES", likes: data }));
   };
 
   const getChats = () => {
@@ -182,12 +200,7 @@ function App() {
               errormsg: data.error,
             })
           : dispatch({ type: "FAILED", errormsg: data.error });
-      })
-      .then(
-        localStorage.token !== "undefined"
-          ? console.log(`Ayyye what up ${current_user.name}`)
-          : console.log("never found ya")
-      );
+      });
   };
 
   const handleSignOut = (e, history) => {
@@ -195,6 +208,7 @@ function App() {
     dispatch({ type: "SIGN_OUT" });
     dispatch({ type: "LOGOUT" });
     console.log("Later gator");
+    history.push("/signin");
   };
 
   const handleEditUser = (e, history, dispatch) => {
@@ -226,7 +240,7 @@ function App() {
     history.push("/myaccount");
   };
 
-  let handleReview = (e) => {
+  let handleReview = (e, history) => {
     e.preventDefault();
     let review = {
       review: e.target[0].value,
@@ -247,6 +261,7 @@ function App() {
       .then((data) => dispatch({ type: "ADD_REVIEW", review: data }))
       .then(getReviews);
     e.target.reset();
+    history.push("/movieshow")
   };
 
   let handleResponseReply = (e) => {
@@ -272,18 +287,6 @@ function App() {
     e.target.reset();
   };
 
-  // const getfanfav = () => {
-  //   let reqPack = {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //     },
-  //   };
-  //   fetch("http://localhost:3000/api/v1/fanfav", reqPack)
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // };
-
   const getmosttalkedabout = () => {
     let reqPack = {
       method: "GET",
@@ -293,7 +296,9 @@ function App() {
     };
     fetch("http://localhost:3000/api/v1/mosttalkedabout", reqPack)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: 'MOSTTALKEDABOUT', mosttalkedabout: data}));
+      .then((data) =>
+        dispatch({ type: "MOSTTALKEDABOUT", mosttalkedabout: data })
+      );
   };
 
   const getmostwatched = () => {
@@ -305,7 +310,7 @@ function App() {
     };
     fetch("http://localhost:3000/api/v1/mostwatched", reqPack)
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "MOSTWATCHED", mostwatched: data}));
+      .then((data) => dispatch({ type: "MOSTWATCHED", mostwatched: data }));
   };
 
   return (
@@ -360,12 +365,16 @@ function App() {
             exact
             path="/myaccount"
             render={(routerProps) => (
-              <UserPage {...routerProps} getMovieWatches={getMovieWatches} />
+              <UserPage
+                {...routerProps}
+                getMovieWatches={getMovieWatches}
+                handleSignOut={handleSignOut}
+              />
             )}
           ></Route>
           <Route
             path="/editprofile"
-            render={(routerProps) => <EditUser {...routerProps} />}
+            render={(routerProps) => <EditUser {...routerProps} getUsers={getUsers} />}
           ></Route>
           <Route
             exact
@@ -376,7 +385,11 @@ function App() {
             exact
             path="/movieshow"
             render={(routerProps) => (
-              <MovieShow {...routerProps} getMovieWatches={getMovieWatches} />
+              <MovieShow
+                {...routerProps}
+                getMovieWatches={getMovieWatches}
+                getLikes={getLikes}
+              />
             )}
           ></Route>
           <Route
@@ -384,6 +397,7 @@ function App() {
             path="/watchparty"
             render={(routerProps) => <Landing {...routerProps} />}
           ></Route>
+          <Route exact path="/media" render={(routerProps) => <WarnerBros {...routerProps} />}></Route>
         </Switch>
       </Router>
     </div>

@@ -28,7 +28,6 @@ function UserPage(props) {
 
   let handleClick = (e, moviewatch) => {
     e.preventDefault();
-    console.log(moviewatch)
     let reqPack = {
       method: "DELETE",
       headers: {
@@ -43,12 +42,12 @@ function UserPage(props) {
     ).then(props.getMovieWatches);
   };
 
-  let taketoshow = (e, moviewatch) => {
-    e.preventDefault()
-    movie = backendmovies.find(
-      (selectmovie) => selectmovie.id === moviewatch.movie_id);
-      dispatch({type: "CLICKED", currentMovie: movie})
-  }
+  // let taketoshow = (e, moviewatch) => {
+  //   e.preventDefault()
+  //   movie = backendmovies.find(
+  //     (selectmovie) => selectmovie.id === moviewatch.movie_id);
+  //     dispatch({type: "CLICKED", currentMovie: movie})
+  // }
 
   let handleMovieClick = (moviewatch) => {
     movie = backendmovies.find((selectmovie) => selectmovie.id === moviewatch.movie_id);
@@ -60,93 +59,92 @@ function UserPage(props) {
     <div>
       <div>
         <MainConHeader />
+        <br></br>
+        <br></br>
         <MainNavBar />
       </div>
-      <div classname="usr">
-        <div className="usrinfo">
-          <div>
-            <h1 className="neonText">{current_user.name}</h1>
-            <br></br>
-            <img
-              src={current_user.profile_picture}
-              style={{ width: "100px" }}
-              alt="profile pic"
-            ></img>
-            <br></br>
-            <h5 style={{ color: "ivory" }}>{current_user.email}</h5>
-            <br></br>
-            <button
-              className="btn btn-primary"
-              style={{ backgroundColor: "red" }}
-              onClick={(e) => props.handleSignOut(e, history)}
-            >
-              Sign Out
-            </button>
-            <Link
-              to="/editprofile"
-              className="btn btn-primary"
-              style={{ backgroundColor: "yellow", color: "black" }}
-            >
-              Edit Account
-            </Link>
-          </div>
+      <div className="usrinfo">
+        <div>
+          <h1 className="neonText">{current_user.name}</h1>
           <br></br>
-          <div>
-            <h3 style={{ color: "ivory" }}>Reviews</h3>
-            <ul>
-              {actualreviews.length > 0 ? (
-                actualreviews.map((review) => (
-                  <li style={{ color: "ivory" }}>
-                    {" "}
-                    Movie:
-                    {movie[0].title} - "{review}"
-                  </li>
-                ))
-              ) : (
-                <h4 style={{ color: "magenta" }}>
-                  Go leave your first review!
-                </h4>
-              )}
-            </ul>
-          </div>
+          <img
+            src={current_user.profile_picture}
+            style={{ width: "100px" }}
+            alt="profile pic"
+          ></img>
+          <br></br>
+          <h5 style={{ color: "ivory" }}>{current_user.email}</h5>
+          <br></br>
+          <button
+            className="btn btn-primary"
+            style={{ backgroundColor: "red" }}
+            onClick={(e) => props.handleSignOut(e, history)}
+          >
+            Sign Out
+          </button>
+          <Link
+            to="/editprofile"
+            className="btn btn-primary"
+            style={{ backgroundColor: "yellow", color: "black" }}
+          >
+            Edit Account
+          </Link>
         </div>
         <br></br>
-        <h3 style={{ color: "ivory" }}>Watchlist</h3>
-        <div className="profcard">
-          {currentmovies.length > 0 ? (
-            currentmovies.map((moviewatch) => (
-              <li onClick={() => handleMovieClick(moviewatch)}>
-                <img
-                  alt="movie poster"
-                  src={
-                    backendmovies.find(
-                      (selectmovie) => selectmovie.id === moviewatch.movie_id
-                    ).poster
-                  }
-                ></img>{" "}
-                <h5 style={{ color: "ivory" }}>
-                  {
-                    backendmovies.find(
-                      (selectmovie) => selectmovie.id === moviewatch.movie_id
-                    ).title
-                  }
-                </h5>
-                <button
-                  className="btn btn-primary"
-                  style={{ backgroundColor: "black" }}
-                  onClick={(e) => handleClick(e, moviewatch)}
-                >
-                  Remove from Watchlist
-                </button>
-                <br></br>
-              </li>
-            ))
-          ) : (
-            <h4 style={{ color: "ivory" }}>Go add a movie!</h4>
-          )}
+        <div>
+          <h3 style={{ color: "ivory" }}>Reviews</h3>
+          <ul>
+            {actualreviews.length > 0 ? (
+              actualreviews.map((review) => (
+                <li style={{ color: "ivory" }}>
+                  {" "}
+                  Movie:
+                  {movie[0].title} - "{review}"
+                </li>
+              ))
+            ) : (
+              <h4 style={{ color: "magenta" }}>Go leave your first review!</h4>
+            )}
+          </ul>
         </div>
       </div>
-      <div className="usrfoot">
+      <br></br>
+      <h3 style={{ color: "ivory" }}>Watchlist</h3>
+      <div className="profcard">
+        {currentmovies.length > 0 ? (
+          currentmovies.map((moviewatch) => (
+            <li>
+              <img
+                onClick={() => handleMovieClick(moviewatch)}
+                alt="movie poster"
+                src={
+                  backendmovies.find(
+                    (selectmovie) => selectmovie.id === moviewatch.movie_id
+                  ).poster
+                }
+              ></img>{" "}
+              <h5 style={{ color: "ivory" }}>
+                {
+                  backendmovies.find(
+                    (selectmovie) => selectmovie.id === moviewatch.movie_id
+                  ).title
+                }
+              </h5>
+              <button
+                className="btn btn-primary"
+                style={{ backgroundColor: "black" }}
+                onClick={(e) => handleClick(e, moviewatch)}
+              >
+                Remove from Watchlist
+              </button>
+              <br></br>
+            </li>
+          ))
+        ) : (
+          <h4 style={{ color: "ivory" }}>Go add a movie!</h4>
+        )}
+      </div>
+      <div >
         <FootBar />
       </div>
     </div>

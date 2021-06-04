@@ -3,7 +3,8 @@ const initialState = {
   errormsg: "",
   current_user: {},
   users: {},
-  hall: false
+  hall: false,
+  created: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const userReducer = (state = initialState, action) => {
     case "CREATE_USER":
       return {
         ...state,
+        created: true,
         errormsg: action.errormsg,
       };
     case "FAILED":

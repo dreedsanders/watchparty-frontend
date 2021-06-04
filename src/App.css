@@ -5,14 +5,6 @@ ul {
 /* End App wide CSS */
 
 
-/* MAIN PARENT ELEMENT */
-.app {
-  background-color: rgb(6, 29, 39);
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-}
-/* END MAIN PARENT ELEMENT */
 
 .respond{
   align-self: center;
@@ -57,7 +49,7 @@ ul {
   float: left;
   background-color: rgb(6, 29, 39);
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
 }
 /* end Left side Filter and news CSS*/
 
@@ -191,7 +183,7 @@ ul {
   background-position: center; 
   background-size: cover;
   width: 100%;
-  height: 100%;
+  
   align-items: center;
 }
 /* end landing page */
@@ -211,8 +203,40 @@ ul {
 }
 
 .show{
-  align-self: center;
-  padding: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid yellow; */
+}
+.header{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+.beody{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  /* border: 1px solid red; */
+}
+.beodycolumn1{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  /* border: 1px solid red; */
+}
+.beodycolumn2{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding-top: 20%;
+  padding-left: 10px;
+   /* border: 1px solid red;  */
 }
 
 .usrinfo{
@@ -221,4 +245,13 @@ ul {
   justify-content: space-evenly;
 }
 
+/* MAIN PARENT ELEMENT */
+.app {
+  background-color: rgb(6, 29, 39);
+  background-size: cover;
+  min-height: 100vh;
+  max-height: 100%;
+  display: flex;
+}
+/* END MAIN PARENT ELEMENT */
 
