@@ -19,6 +19,8 @@ import MovieShow from "./Components/MovieShow";
 import Respond from "./Components/Respond";
 import Landing from "./Components/LandingPage";
 import WarnerBros from "./Components/WarnerBros"
+import A24 from "./Components/A24";
+import MediaNavBar from "./Components/MediaNavBar";
 
 function App() {
   let dispatch = useDispatch();
@@ -313,6 +315,7 @@ function App() {
       .then((data) => dispatch({ type: "MOSTWATCHED", mostwatched: data }));
   };
 
+  
   return (
     <div style={{ textAlign: "center" }} className="app">
       <Router>
@@ -397,7 +400,7 @@ function App() {
             path="/watchparty"
             render={(routerProps) => <Landing {...routerProps} />}
           ></Route>
-          <Route exact path="/media" render={(routerProps) => <WarnerBros {...routerProps} />}></Route>
+          <Route exact path="/media" render={(routerProps) => <MediaNavBar {...routerProps} />}></Route>
         </Switch>
       </Router>
     </div>

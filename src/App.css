@@ -4,11 +4,10 @@ ul {
 }
 /* End App wide CSS */
 
-
-
 .respond{
-  align-self: center;
-  padding: 45%;
+  width: 100vh;
+  height: 100vh;
+  justify-self: center;
 }
 .review {
   align-self: center;
@@ -151,9 +150,6 @@ ul {
 /* End footer section */
 
 
-
-
-
 /* CREATE USER */
 .formcontainer {
   display: flex;
@@ -171,8 +167,6 @@ ul {
   padding-left: 45%;
 }
 /* END SIGN IN */
-
-
 
 
 /* Landing page */
@@ -255,3 +249,19 @@ ul {
 }
 /* END MAIN PARENT ELEMENT */
 
+.mediapage{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100%;
+  width: 100%;
+  align-self: center;
+
+}
+
+.vdo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

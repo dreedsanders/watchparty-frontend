@@ -17,16 +17,14 @@ function ReviewResponse(props) {
 
   return (
     <div style={{ color: "ivory" }} className="respond">
-      <h1>Review</h1>
       <h2>"{currentreview.review}"</h2>
       <h5>Responses</h5>
       <ul>{currentresponses.map((response) => (
-        <li>{response.response}</li>
+        <li>-{response.response}-</li>
       ))}</ul>
       <br></br>
-      <h4>Reply to Review</h4>
       <form onSubmit={(e) => props.handleResponseReply(e, history, dispatch)}>
-        <label>Response</label>
+        <label>Respond</label>
         <input type="textarea" style={{ color: "black" }}></input>
         <br></br>
         <input

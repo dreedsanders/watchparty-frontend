@@ -1,8 +1,8 @@
 import React from "react";
 
-function Videos(props) {
+function A24(props) {
   return (
-    <div className="vdo">
+    <div>
       {props.resultyt.map((link, i) => {
         const frame = (
           <div key={i}>
@@ -23,5 +23,4 @@ function Videos(props) {
   );
 }
 
-export default Videos;
-
+export default A24;
