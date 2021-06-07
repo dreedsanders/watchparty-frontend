@@ -58,7 +58,7 @@ function Users(props) {
       <br></br>
       <MainNavBar />
       <div className="usrinfo" id="left">
-        <ul>
+        <ul className="usrlist">
           <h2>Users</h2>
           <h5 style={{color: "yellow"}}>Click each user to view watchlist</h5>
           {users.map((user) => {return <SocialUser user={user} key={user.id} />}

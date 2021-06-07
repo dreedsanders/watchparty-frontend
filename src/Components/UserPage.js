@@ -144,7 +144,7 @@ function UserPage(props) {
           <h4 style={{ color: "ivory" }}>Go add a movie!</h4>
         )}
       </div>
-      <div >
+      <div>
         <FootBar />
       </div>
     </div>

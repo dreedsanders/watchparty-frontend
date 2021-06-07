@@ -70,6 +70,7 @@ ul {
   background-color: rgba(8, 40, 61, 0.699);
   border: 1px solid rgba(250, 231, 126, 0.8);
   padding: 10px;
+  padding-bottom: 15px;
   color: ivory
 }
 /* End movie list CSS */
@@ -127,13 +128,6 @@ ul {
 
 
 
-/* UserPage Watchlist */
-.profcard{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-/* End User Watchlist */
 
 
 
@@ -230,14 +224,27 @@ ul {
   width: auto;
   padding-top: 20%;
   padding-left: 10px;
-   /* border: 1px solid red;  */
+  /* border: 1px solid red;  */
 }
 
 .usrinfo{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+  width: 100%;
 }
+/* UserPage Watchlist */
+.profcard{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+/* End User Watchlist */
+
+
 
 /* MAIN PARENT ELEMENT */
 .app {

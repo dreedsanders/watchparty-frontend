@@ -25,7 +25,7 @@ const SocialUser = ({user}) => {
     return (<li onClick={(e) => handleUser(e)}>
         <h3>{user.name}</h3>
         {watchlist ? 
-            <ul>Movies {user.name} is watching :{thesemovies.map(movie => <p style={{color: "blue"}}>{movie}</p>)}</ul> : null}
+            <ul>Movies {user.name} is watching :{thesemovies.map(movie => <p style={{color: "yellow"}}>{movie}</p>)}</ul> : null}
     </li>);
 }
 

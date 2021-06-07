@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MainConHeader from "../Components/MainConHeader";
+import MainNavBar from "../Components/MainNavBar"
 
 const SignIn = (props) => {
   const logged_in = useSelector((state) => state.userState.logged_in);
@@ -9,11 +10,6 @@ const SignIn = (props) => {
 
   return (
     <div className="formcontainer2">
-      {/* <div className="header">
-        <MainConHeader />
-        <br></br>
-        <br></br>
-      </div> */}
       <form onSubmit={(e) => props.handleLogin(e)}>
         <h2 className="neonText">Sign In</h2>
         <br></br>
@@ -32,10 +28,21 @@ const SignIn = (props) => {
           className="form-control"
           placeholder="Password"
         ></input>
-
-        <input type="submit" className="btn btn-primary"></input>
         <br></br>
-        <Link to="/" className="btn btn-primary">
+        <input
+          type="submit"
+          className="btn btn-primary"
+          value="Sign In"
+          style={{ backgroundColor: "black" }}
+        ></input>
+        <br></br>
+        <span></span>
+        <br></br>
+        <Link
+          to="/"
+          className="btn btn-primary"
+          style={{ backgroundColor: "black" }}
+        >
           Create Account
         </Link>
       </form>
